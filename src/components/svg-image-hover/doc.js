@@ -1,8 +1,4 @@
-import {
-  writeClipboardXscp,
-  validateCopyPayload,
-  getXscpFromPasteEvent,
-} from "webflow-clipboard";
+import { writeClipboardXscp, validateCopyPayload } from "webflow-clipboard";
 
 /** Référence une carte (démo) — onglet Code uniquement ; Webflow = natif + wf-lib.css. */
 const SNIPPETS = {
@@ -72,7 +68,10 @@ const SNIPPETS = {
   jsStandalone: `import { initSvgImageHover } from "./svg-image-hover.js";
 
 const el = document.querySelector('[data-component="svg-image-hover"]');
-initSvgImageHover(el);`,
+const { destroy } = initSvgImageHover(el, {
+  // optionnel : strokeWidthHover, durationStrokeIn, …
+});
+// destroy() pour nettoyer (listeners + GSAP) avant retrait du DOM`,
 };
 
 const XSCP_URL = new URL("./webflow-structure.xscp.json", import.meta.url);
@@ -80,25 +79,17 @@ const XSCP_URL = new URL("./webflow-structure.xscp.json", import.meta.url);
 let loadedXscp = "";
 
 const statusWebflow = document.getElementById("status-webflow");
-const xscpPaste = document.getElementById("xscp-paste");
 const btnCopyWebflow = document.getElementById("btn-copy-webflow");
-const btnReloadXscp = document.getElementById("btn-reload-xscp");
 function setWebflowStatus(message, kind = "info") {
   statusWebflow.textContent = message;
   statusWebflow.dataset.kind = kind;
 }
 
-function currentXscp() {
-  const pasted = xscpPaste.value.trim();
-  return pasted || loadedXscp;
-}
-
 function updateWebflowButtonState() {
-  const raw = currentXscp();
-  btnCopyWebflow.disabled = !raw;
+  btnCopyWebflow.disabled = !loadedXscp;
 }
 
-async function loadOptionalXscpFile() {
+async function loadXscpFile() {
   try {
     const res = await fetch(XSCP_URL.href, { cache: "no-store" });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -107,44 +98,28 @@ async function loadOptionalXscpFile() {
     if (!v.valid) throw new Error(v.error);
     loadedXscp = text.trim();
     setWebflowStatus(
-      "Fichier webflow-structure.xscp.json chargé. Vous pouvez coller dans le Designer (Cmd+V / Ctrl+V).",
+      "Structure prête. Cliquez sur « Copier pour Webflow », puis collez sur le canvas du Designer (Cmd+V / Ctrl+V).",
       "ok"
     );
-  } catch {
+  } catch (err) {
     loadedXscp = "";
+    const msg =
+      err instanceof Error ? err.message : String(err);
     setWebflowStatus(
-      "Aucun webflow-structure.xscp.json trouvé : collez un export Webflow ci-dessous, ou ajoutez ce fichier à côté de doc.html.",
-      "info"
+      `Impossible de charger webflow-structure.xscp.json (${msg}). Vérifiez que le fichier est bien à côté de cette page.`,
+      "err"
     );
   }
   updateWebflowButtonState();
 }
 
-xscpPaste.addEventListener("paste", (e) => {
-  const xscp = getXscpFromPasteEvent(e);
-  if (!xscp) return;
-  e.preventDefault();
-  xscpPaste.value = xscp;
-  const v = validateCopyPayload(xscp);
-  setWebflowStatus(
-    v.valid
-      ? "JSON Webflow collé. Prêt pour « Copier pour le Designer »."
-      : `JSON invalide : ${v.error}`,
-    v.valid ? "ok" : "err"
-  );
-  updateWebflowButtonState();
-});
-
-xscpPaste.addEventListener("input", updateWebflowButtonState);
-
-btnReloadXscp?.addEventListener("click", () => {
-  loadOptionalXscpFile();
-});
-
 btnCopyWebflow.addEventListener("click", () => {
-  const raw = currentXscp();
+  const raw = loadedXscp;
   if (!raw) {
-    setWebflowStatus("Collez d’abord le JSON Webflow ou ajoutez webflow-structure.xscp.json.", "err");
+    setWebflowStatus(
+      "Le JSON Webflow n’est pas chargé. Rechargez la page ou vérifiez webflow-structure.xscp.json.",
+      "err"
+    );
     return;
   }
   const v = validateCopyPayload(raw);
@@ -210,5 +185,5 @@ document.querySelectorAll("[data-tab]").forEach((btn) => {
   });
 });
 
-loadOptionalXscpFile();
+loadXscpFile();
 updateWebflowButtonState();

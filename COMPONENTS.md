@@ -95,6 +95,7 @@ Effet de hover sur des cards avec animation SVG stroke-dashoffset et apparition 
 | `data-component="svg-image-hover"` | Conteneur racine | Active le composant sur cet élément |
 | `data-svg-hover-card` | Chaque card | Cible sur laquelle s'attachent les événements hover/focus |
 | `data-svg-hover-title` | Élément texte dans la card | Titre dont les mots seront animés en entrée |
+| `data-svg-hover-paths` | Conteneur optionnel dans la card | Limite les `path` animés à ce sous-arbre (évite d’autres SVG / icônes dans la même card) |
 | `tabindex="0"` | `data-svg-hover-card` | Rend la card focusable au clavier (accessibilité) |
 
 ### Classes CSS à respecter
@@ -139,7 +140,10 @@ import { initSvgImageHover } from "./svg-image-hover.js";
 
 // Sur un élément précis
 const el = document.querySelector('[data-component="svg-image-hover"]');
-initSvgImageHover(el);
+const { destroy } = initSvgImageHover(el);
+// destroy() : retire les listeners, tue les tweens GSAP (SPA / re-render)
+
+// Options optionnelles : strokeWidthHover, durationStrokeIn, durationStrokeOut, durationWordsIn, durationWordsOut
 
 // Ou sur plusieurs éléments
 document

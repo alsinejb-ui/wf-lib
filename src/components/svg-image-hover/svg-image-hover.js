@@ -1,15 +1,46 @@
 import gsap from "gsap";
 
-// Vanilla word splitter — no GSAP SplitText Club dependency needed
+const STROKE_WIDTH_HOVER = 700;
+const DEFAULT_STROKE_WIDTH_FALLBACK = 200;
+const DURATION_STROKE_IN = 1.5;
+const DURATION_STROKE_OUT = 1;
+const DURATION_WORDS_IN = 0.75;
+const DURATION_WORDS_OUT = 0.5;
+const STAGGER_WORDS_IN = 0.075;
+const STAGGER_WORDS_OUT_EACH = 0.05;
+const WORDS_IN_POSITION = 0.35;
+
+const INIT_FLAG = "data-wf-lib-svg-hover";
+
+/** Ré-init sur le même `el` : teardown de l’instance précédente (SPA / hot reload). */
+const destroyByRoot = new WeakMap();
+
+/**
+ * @typedef {Object} SvgImageHoverOptions
+ * @property {number} [strokeWidthHover]
+ * @property {number} [durationStrokeIn]
+ * @property {number} [durationStrokeOut]
+ * @property {number} [durationWordsIn]
+ * @property {number} [durationWordsOut]
+ */
+
+// Vanilla word splitter — DOM pur (pas d’innerHTML) pour éviter XSS sur titres CMS
 function splitWords(el) {
-  const words = el.textContent.trim().split(/\s+/);
-  el.innerHTML = words
-    .map(
-      (w) =>
-        `<span class="wf-lib-word-mask"><span class="wf-lib-svg-hover-word">${w}</span></span>`,
-    )
-    .join(" ");
-  return el.querySelectorAll(".wf-lib-svg-hover-word");
+  const words = el.textContent.trim().split(/\s+/).filter(Boolean);
+  el.replaceChildren();
+  const wordElements = [];
+  words.forEach((w, i) => {
+    if (i > 0) el.appendChild(document.createTextNode(" "));
+    const mask = document.createElement("span");
+    mask.className = "wf-lib-word-mask";
+    const inner = document.createElement("span");
+    inner.className = "wf-lib-svg-hover-word";
+    inner.textContent = w;
+    mask.appendChild(inner);
+    el.appendChild(mask);
+    wordElements.push(inner);
+  });
+  return wordElements;
 }
 
 /** Cartes : descendants, ou la racine si elle porte déjà data-svg-hover-card (cas Webflow courant). */
@@ -19,11 +50,17 @@ function getSvgHoverCards(root) {
   return [...root.querySelectorAll("[data-svg-hover-card]")];
 }
 
-/** Traits animés : .svg-stroke path (démo) ou tout path dans un svg de la carte (Webflow). */
+/**
+ * Traits animés : si présent, `[data-svg-hover-paths]` limite la recherche aux paths décoratifs
+ * (évite d’attraper d’autres svg dans la card). Sinon `.svg-stroke path`, puis repli `svg path`.
+ */
 function getStrokePaths(card) {
-  const scoped = card.querySelectorAll(".svg-stroke path");
+  const scope = card.querySelector("[data-svg-hover-paths]");
+  const root = scope ?? card;
+
+  const scoped = root.querySelectorAll(".svg-stroke path");
   if (scoped.length > 0) return [...scoped];
-  return [...card.querySelectorAll("svg path")];
+  return [...root.querySelectorAll("svg path")];
 }
 
 /** Longueur de tracé fiable (Webflow / SVG souvent besoin d’un layout avant getTotalLength). */
@@ -39,15 +76,36 @@ function readBaseStrokeWidth(path) {
   const raw =
     path.getAttribute("stroke-width") ??
     path.getAttribute("strokeWidth") ??
-    "200";
+    String(DEFAULT_STROKE_WIDTH_FALLBACK);
   const n = parseFloat(String(raw), 10);
-  return Number.isFinite(n) && n > 0 ? n : 200;
+  return Number.isFinite(n) && n > 0 ? n : DEFAULT_STROKE_WIDTH_FALLBACK;
 }
 
-export function initSvgImageHover(el) {
+/**
+ * @param {Element} el
+ * @param {SvgImageHoverOptions} [options]
+ * @returns {{ destroy: () => void }}
+ */
+export function initSvgImageHover(el, options = {}) {
+  const strokeWidthHover = options.strokeWidthHover ?? STROKE_WIDTH_HOVER;
+  const durationStrokeIn = options.durationStrokeIn ?? DURATION_STROKE_IN;
+  const durationStrokeOut = options.durationStrokeOut ?? DURATION_STROKE_OUT;
+  const durationWordsIn = options.durationWordsIn ?? DURATION_WORDS_IN;
+  const durationWordsOut = options.durationWordsOut ?? DURATION_WORDS_OUT;
+
+  const prevDestroy = destroyByRoot.get(el);
+  if (prevDestroy) prevDestroy();
+
   const cards = getSvgHoverCards(el);
+  const destroyFns = [];
+
+  if (cards.length === 0) {
+    return { destroy() {} };
+  }
 
   cards.forEach((card) => {
+    if (card.getAttribute(INIT_FLAG) === "1") return;
+
     const pathEls = getStrokePaths(card);
     const titleEl = card.querySelector("[data-svg-hover-title]");
 
@@ -91,8 +149,11 @@ export function initSvgImageHover(el) {
         tl.to(
           path,
           {
-            attr: { "stroke-dashoffset": 0, "stroke-width": 700 },
-            duration: 1.5,
+            attr: {
+              "stroke-dashoffset": 0,
+              "stroke-width": strokeWidthHover,
+            },
+            duration: durationStrokeIn,
             ease: "power2.out",
           },
           0,
@@ -103,11 +164,11 @@ export function initSvgImageHover(el) {
         words,
         {
           yPercent: 0,
-          duration: 0.75,
+          duration: durationWordsIn,
           ease: "power3.out",
-          stagger: 0.075,
+          stagger: STAGGER_WORDS_IN,
         },
-        0.35,
+        WORDS_IN_POSITION,
       );
     };
 
@@ -123,7 +184,7 @@ export function initSvgImageHover(el) {
               "stroke-dashoffset": length,
               "stroke-width": baseStrokeWidth,
             },
-            duration: 1,
+            duration: durationStrokeOut,
             ease: "power2.out",
           },
           0,
@@ -134,9 +195,9 @@ export function initSvgImageHover(el) {
         words,
         {
           yPercent: 100,
-          duration: 0.5,
+          duration: durationWordsOut,
           ease: "power3.out",
-          stagger: { each: 0.05, from: "end" },
+          stagger: { each: STAGGER_WORDS_OUT_EACH, from: "end" },
         },
         0,
       );
@@ -144,10 +205,31 @@ export function initSvgImageHover(el) {
 
     card.addEventListener("mouseenter", onEnter);
     card.addEventListener("mouseleave", onLeave);
-    // Keyboard accessibility
     card.addEventListener("focus", onEnter);
     card.addEventListener("blur", onLeave);
+    card.setAttribute(INIT_FLAG, "1");
+
+    const pathsOnly = strokeTargets.map((t) => t.path);
+    destroyFns.push(() => {
+      if (tl) tl.kill();
+      gsap.killTweensOf([...words, ...pathsOnly]);
+      card.removeEventListener("mouseenter", onEnter);
+      card.removeEventListener("mouseleave", onLeave);
+      card.removeEventListener("focus", onEnter);
+      card.removeEventListener("blur", onLeave);
+      card.removeAttribute(INIT_FLAG);
+    });
   });
+
+  const destroy = () => {
+    for (let i = destroyFns.length - 1; i >= 0; i--) destroyFns[i]();
+    destroyFns.length = 0;
+    destroyByRoot.delete(el);
+  };
+
+  destroyByRoot.set(el, destroy);
+
+  return { destroy };
 }
 
 // Auto-init when used standalone (demo.html)

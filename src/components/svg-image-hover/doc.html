@@ -252,16 +252,6 @@
         background: var(--surface);
         font-size: 0.8rem;
       }
-      #xscp-paste {
-        width: 100%;
-        min-height: 100px;
-        font-family: var(--mono);
-        font-size: 0.68rem;
-        padding: 0.65rem;
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        resize: vertical;
-      }
       #status-webflow {
         font-size: 0.85rem;
         padding: 0.6rem 0.75rem;
@@ -565,27 +555,20 @@
         <section class="block">
           <h2>Étape 2 — Structure native dans le Designer</h2>
           <p class="hint" style="margin-top: 0">
-            Collez une structure déjà construite (divs, classes
-            <code>card-img</code>, <code>svg-stroke</code>, SVG inline dans des
-            blocs natifs, attributs <code>data-*</code>) via le JSON Webflow
-            ci-dessous, ou recréez la hiérarchie à la main en vous calant sur
-            l’onglet <strong>Code</strong> (référence HTML uniquement).
-            Vous pouvez mettre <code>data-component="svg-image-hover"</code> sur
-            un conteneur <strong>ou</strong> sur la même div que
-            <code>data-svg-hover-card</code> (les deux sont pris en charge depuis
-            wf-lib récent).
+            La hiérarchie de démo (classes <code>card-img</code>,
+            <code>svg-stroke</code>, SVG en blocs natifs, attributs
+            <code>data-component</code> / <code>data-svg-hover-card</code>) est
+            fournie en JSON Webflow dans
+            <code>webflow-structure.xscp.json</code> (à côté de cette page).
+            Pour la recréer à la main, servez-vous de l’onglet
+            <strong>Code</strong> comme référence HTML uniquement.
           </p>
           <div class="webflow-box">
             <p class="hint" style="margin-top: 0">
-              Placez <code>webflow-structure.xscp.json</code> dans ce dossier
-              (export depuis le Designer), ou collez le JSON après une copie
-              dans le Designer.
+              Un clic copie le même payload que « Copy to Webflow » dans le
+              Designer : collez ensuite sur le canvas avec
+              <strong>Cmd+V</strong> / <strong>Ctrl+V</strong>.
             </p>
-            <textarea
-              id="xscp-paste"
-              placeholder="Cmd+V après copie dans le Webflow Designer…"
-              spellcheck="false"
-            ></textarea>
             <div class="webflow-actions">
               <button
                 type="button"
@@ -593,17 +576,13 @@
                 id="btn-copy-webflow"
                 disabled
               >
-                Copier pour le Designer
-              </button>
-              <button type="button" class="btn-ghost" id="btn-reload-xscp">
-                Recharger le fichier .xscp
+                Copier pour Webflow
               </button>
             </div>
             <div id="status-webflow" data-kind="info"></div>
             <p class="hint">
-              Le collage <strong>Cmd+V / Ctrl+V</strong> sur le canvas recrée
-              les éléments natifs et leurs classes — le CSS wf-lib (étape 1)
-              s’applique alors comme sur la démo.
+              Le collage sur le canvas recrée les éléments natifs et leurs
+              classes — le CSS wf-lib (étape 1) s’applique comme sur la démo.
             </p>
           </div>
         </section>
