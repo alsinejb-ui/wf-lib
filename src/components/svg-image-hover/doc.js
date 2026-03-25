@@ -31,13 +31,13 @@ const SNIPPETS = {
   headGlobal: `<!-- Dans <head> — Project Settings > Custom Code -->
 <link
   rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/alsinejb-ui/wf-lib@v1.0.0/dist/wf-lib.css"
+  href="https://cdn.jsdelivr.net/gh/alsinejb-ui/wf-lib@main/dist/wf-lib.css"
 />`,
 
   bodyGlobal: `<!-- Avant </body> -->
 <script
   type="module"
-  src="https://cdn.jsdelivr.net/gh/alsinejb-ui/wf-lib@v1.0.0/dist/wf-lib.js"
+  src="https://cdn.jsdelivr.net/gh/alsinejb-ui/wf-lib@main/dist/wf-lib.js"
 ></script>`,
 
   headIndividual: `<!-- Dans <head> — après build:components -->
