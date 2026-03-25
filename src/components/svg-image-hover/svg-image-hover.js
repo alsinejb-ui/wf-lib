@@ -12,8 +12,15 @@ function splitWords(el) {
   return el.querySelectorAll(".wf-lib-svg-hover-word");
 }
 
+/** Cartes : descendants, ou la racine si elle porte déjà data-svg-hover-card (cas Webflow courant). */
+function getSvgHoverCards(root) {
+  if (!root || root.nodeType !== 1) return [];
+  if (root.matches?.("[data-svg-hover-card]")) return [root];
+  return [...root.querySelectorAll("[data-svg-hover-card]")];
+}
+
 export function initSvgImageHover(el) {
-  const cards = el.querySelectorAll("[data-svg-hover-card]");
+  const cards = getSvgHoverCards(el);
 
   cards.forEach((card) => {
     const paths = card.querySelectorAll(".svg-stroke path");

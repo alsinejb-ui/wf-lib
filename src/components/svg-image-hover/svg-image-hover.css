@@ -1,7 +1,8 @@
 /* svg-image-hover — styles scopés composant uniquement */
 /* Les styles de mise en page (body, .row, header/footer) sont dans la demo */
 
-[data-component="svg-image-hover"] [data-svg-hover-card] {
+[data-component="svg-image-hover"] [data-svg-hover-card],
+[data-component="svg-image-hover"][data-svg-hover-card] {
   position: relative;
   overflow: hidden;
   border-radius: inherit;
