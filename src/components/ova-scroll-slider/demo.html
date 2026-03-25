@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OVA Scroll Slider | Demo</title>
+    <link rel="stylesheet" href="./ova-scroll-slider.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        width: 100%;
+        min-height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      data-component="ova-scroll-slider"
+      data-ova-lenis="true"
+      data-ova-scrub="1"
+      data-ova-slides='[
+        {"image": "./public/slider_img_1.jpg", "title": "Under the soft hum of streetlights she watches the world ripple through glass, her calm expression mirrored in the fragments of drifting light."},
+        {"image": "./public/slider_img_2.jpg", "title": "A car slices through the desert, shadow chasing the wind as clouds of dust rise behind, blurring the horizon into gold and thunder."},
+        {"image": "./public/slider_img_3.jpg", "title": "Reflections ripple across mirrored faces, each one a fragment of identity, caught between defiance, doubt, and the silence of thought."},
+        {"image": "./public/slider_img_4.jpg", "title": "Soft light spills through the café windows as morning settles into wood and metal, capturing the rhythm of quiet human routine."},
+        {"image": "./public/slider_img_5.jpg", "title": "Every serve becomes a battle between focus and instinct, movement flowing like rhythm as the court blurs beneath the sunlight."},
+        {"image": "./public/slider_img_6.jpg", "title": "Amber light spills over the stage as guitars cry into smoke and shadow, where music and motion merge into pure energy."},
+        {"image": "./public/slider_img_7.jpg", "title": "Dust erupts beneath his stride as sweat glints under floodlights, every step pushing closer to victory, grit, and pure determination."}
+      ]'
+    >
+      <section data-ova-intro>
+        <h1>
+          Scroll to explore the rhythm of still images that move quietly between
+          story and sensation.
+        </h1>
+      </section>
+
+      <section data-ova-slider>
+        <div data-ova-images></div>
+        <div data-ova-title><h1></h1></div>
+        <div data-ova-indicator>
+          <div data-ova-indices></div>
+          <div data-ova-progress-track>
+            <div data-ova-progress></div>
+          </div>
+        </div>
+      </section>
+
+      <section data-ova-outro>
+        <h1>
+          As the sequence slows the silence takes over, holding the last traces
+          of motion in the air.
+        </h1>
+      </section>
+    </div>
+
+    <script type="module" src="./ova-scroll-slider.js"></script>
+  </body>
+</html>

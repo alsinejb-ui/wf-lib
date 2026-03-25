@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eduardbodak Scroll Animation | Demo</title>
+    <link rel="stylesheet" href="./eduardbodak-scroll-animation.css" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        min-height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-component="eduardbodak-scroll-animation" data-ebsa-lenis="true">
+      <nav data-ebsa-nav>
+        <div class="logo"><span>Site Logo</span></div>
+        <div class="menu-btn"><span>Menu</span></div>
+      </nav>
+
+      <section data-ebsa-hero>
+        <div data-ebsa-hero-cards>
+          <div class="card" id="hero-card-1">
+            <div class="card-title"><span>Plan</span><span>01</span></div>
+            <div class="card-title"><span>01</span><span>Plan</span></div>
+          </div>
+          <div class="card" id="hero-card-2">
+            <div class="card-title"><span>Design</span><span>02</span></div>
+            <div class="card-title"><span>02</span><span>Design</span></div>
+          </div>
+          <div class="card" id="hero-card-3">
+            <div class="card-title"><span>Develop</span><span>03</span></div>
+            <div class="card-title"><span>03</span><span>Develop</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section data-ebsa-about>
+        <h1>Keep scrolling — it gets good</h1>
+      </section>
+
+      <section data-ebsa-services>
+        <div data-ebsa-services-header>
+          <h1>Stuff I make so you do not have to</h1>
+        </div>
+
+        <div class="mobile-cards">
+          <div class="cards-container">
+            <div class="card" id="mobile-card-1">
+              <div class="card-wrapper">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <div class="card-title"><span>Plan</span><span>01</span></div>
+                    <div class="card-title"><span>01</span><span>Plan</span></div>
+                  </div>
+                  <div class="flip-card-back">
+                    <div class="card-title"><span>Plan</span><span>01</span></div>
+                    <div class="card-copy">
+                      <p>Discovery</p><p>Audit</p><p>User Flow</p><p>Site Map</p><p>Personas</p><p>Strategy</p>
+                    </div>
+                    <div class="card-title"><span>01</span><span>Plan</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card" id="mobile-card-2">
+              <div class="card-wrapper">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <div class="card-title"><span>Design</span><span>02</span></div>
+                    <div class="card-title"><span>02</span><span>Design</span></div>
+                  </div>
+                  <div class="flip-card-back">
+                    <div class="card-title"><span>Design</span><span>02</span></div>
+                    <div class="card-copy">
+                      <p>Wireframes</p><p>UI Kits</p><p>Prototypes</p><p>Visual Style</p><p>Interaction</p><p>Design QA</p>
+                    </div>
+                    <div class="card-title"><span>02</span><span>Design</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card" id="mobile-card-3">
+              <div class="card-wrapper">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <div class="card-title"><span>Develop</span><span>03</span></div>
+                    <div class="card-title"><span>03</span><span>Develop</span></div>
+                  </div>
+                  <div class="flip-card-back">
+                    <div class="card-title"><span>Develop</span><span>03</span></div>
+                    <div class="card-copy">
+                      <p>HTML/CSS/JS</p><p>CMS Build</p><p>GSAP Motion</p><p>Responsive</p><p>Optimization</p><p>Launch</p>
+                    </div>
+                    <div class="card-title"><span>03</span><span>Develop</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cards" data-ebsa-cards-layer>
+        <div class="cards-container">
+          <div class="card" id="card-1">
+            <div class="card-wrapper">
+              <div class="flip-card-inner">
+                <div class="flip-card-front">
+                  <div class="card-title"><span>Plan</span><span>01</span></div>
+                  <div class="card-title"><span>01</span><span>Plan</span></div>
+                </div>
+                <div class="flip-card-back">
+                  <div class="card-title"><span>Plan</span><span>01</span></div>
+                  <div class="card-copy">
+                    <p>Discovery</p><p>Audit</p><p>User Flow</p><p>Site Map</p><p>Personas</p><p>Strategy</p>
+                  </div>
+                  <div class="card-title"><span>01</span><span>Plan</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" id="card-2">
+            <div class="card-wrapper">
+              <div class="flip-card-inner">
+                <div class="flip-card-front">
+                  <div class="card-title"><span>Design</span><span>02</span></div>
+                  <div class="card-title"><span>02</span><span>Design</span></div>
+                </div>
+                <div class="flip-card-back">
+                  <div class="card-title"><span>Design</span><span>02</span></div>
+                  <div class="card-copy">
+                    <p>Wireframes</p><p>UI Kits</p><p>Prototypes</p><p>Visual Style</p><p>Interaction</p><p>Design QA</p>
+                  </div>
+                  <div class="card-title"><span>02</span><span>Design</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" id="card-3">
+            <div class="card-wrapper">
+              <div class="flip-card-inner">
+                <div class="flip-card-front">
+                  <div class="card-title"><span>Develop</span><span>03</span></div>
+                  <div class="card-title"><span>03</span><span>Develop</span></div>
+                </div>
+                <div class="flip-card-back">
+                  <div class="card-title"><span>Develop</span><span>03</span></div>
+                  <div class="card-copy">
+                    <p>HTML/CSS/JS</p><p>CMS Build</p><p>GSAP Motion</p><p>Responsive</p><p>Optimization</p><p>Launch</p>
+                  </div>
+                  <div class="card-title"><span>03</span><span>Develop</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section data-ebsa-outro>
+        <h1>The story is not over yet</h1>
+      </section>
+    </div>
+
+    <script type="module" src="./eduardbodak-scroll-animation.js"></script>
+  </body>
+</html>

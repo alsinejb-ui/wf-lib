@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Camille Mormal Slider | Demo</title>
+    <script type="module" src="/src/index.js"></script>
+    <style>
+      html, body { margin: 0; padding: 0; width: 100%; min-height: 100%; background: #000; }
+    </style>
+  </head>
+  <body>
+    <section data-component="camille-mormal-slider">
+      <nav data-cms-nav>
+        <a href="#" id="active">Work</a>
+        <a href="#">About</a>
+      </nav>
+
+      <div class="slider" data-cms-slider>
+        <div class="slider-images" data-cms-images>
+          <div class="img"><img src="./public/img1.jpg" alt="" /></div>
+        </div>
+
+        <div class="slider-title">
+          <div class="slider-title-wrapper" data-cms-titles>
+            <p>The Revival Ensemble</p>
+            <p>Above The Canvas</p>
+            <p>Harmony in Every Note</p>
+            <p>Redefining Imagination</p>
+            <p>From Earth to Expression</p>
+          </div>
+        </div>
+
+        <div class="slider-counter">
+          <div class="counter" data-cms-counter>
+            <p>1</p>
+            <p>2</p>
+            <p>3</p>
+            <p>4</p>
+            <p>5</p>
+          </div>
+          <div><p>&mdash;</p></div>
+          <div><p>5</p></div>
+        </div>
+
+        <div class="slider-preview" data-cms-preview>
+          <div class="preview active"><img src="./public/img1.jpg" alt="" /></div>
+          <div class="preview"><img src="./public/img2.jpg" alt="" /></div>
+          <div class="preview"><img src="./public/img3.jpg" alt="" /></div>
+          <div class="preview"><img src="./public/img4.jpg" alt="" /></div>
+          <div class="preview"><img src="./public/img5.jpg" alt="" /></div>
+        </div>
+
+        <div class="slider-indicators" data-cms-indicators>
+          <p>+</p>
+          <p>+</p>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

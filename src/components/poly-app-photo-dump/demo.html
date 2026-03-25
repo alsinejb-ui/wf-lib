@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Poly App Photo Dump | Demo</title>
+    <link rel="stylesheet" href="./poly-app-photo-dump.css" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        min-height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      data-component="poly-app-photo-dump"
+      data-poly-lenis="true"
+      data-poly-scrub="1"
+      data-poly-pin-multiplier="6"
+      data-poly-headings='[
+        "Order is temporary while you are passing through",
+        "Memories shuffle like cards in an endless deck",
+        "Each moment scatters as another takes its place",
+        "The fragments float before settling once more"
+      ]'
+    >
+      <section data-poly-intro>
+        <h1>Time loosens its grip and the stack begins to shift</h1>
+      </section>
+
+      <section data-poly-spotlight>
+        <h1 data-poly-gallery-heading></h1>
+      </section>
+
+      <section data-poly-outro>
+        <h1>Eventually, the stack settles and the scroll continues</h1>
+      </section>
+    </div>
+
+    <script type="module" src="./poly-app-photo-dump.js"></script>
+  </body>
+</html>

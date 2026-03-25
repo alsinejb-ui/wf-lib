@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reveal | Demo</title>
+    <link rel="stylesheet" href="./reveal.css" />
+    <style>
+      /* Styles demo uniquement */
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: sans-serif;
+        color: #111;
+      }
+
+      .demo-section {
+        padding: 20vh 4rem;
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1.5rem;
+      }
+
+      .demo-section:nth-child(even) {
+        background: #f5f5f5;
+      }
+
+      h2 {
+        font-size: clamp(2rem, 4vw, 4rem);
+        font-weight: 600;
+        line-height: 1.2;
+      }
+
+      p {
+        font-size: 1.125rem;
+        max-width: 60ch;
+        line-height: 1.65;
+        color: #444;
+      }
+
+      a {
+        display: inline-block;
+        font-size: 1rem;
+        font-weight: 500;
+        color: #111;
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+
+    <section
+      class="demo-section"
+      data-component="reveal"
+      data-stagger="0.08"
+      data-duration="0.6"
+    >
+      <h2 data-reveal-item>Titre de section</h2>
+      <p data-reveal-item>Paragraphe animé qui apparaît au scroll avec stagger et fade.</p>
+      <a data-reveal-item href="#">Lien CTA →</a>
+    </section>
+
+    <section
+      class="demo-section"
+      data-component="reveal"
+      data-stagger="0.1"
+      data-duration="0.8"
+      data-y="30"
+    >
+      <h2 data-reveal-item>Décalage plus fort</h2>
+      <p data-reveal-item>Durée plus longue et translation verticale plus prononcée (data-y="30").</p>
+    </section>
+
+    <section
+      class="demo-section"
+      data-component="reveal"
+      data-stagger="0.05"
+      data-duration="0.5"
+      data-ease="expo.out"
+    >
+      <h2 data-reveal-item>Easing expo.out</h2>
+      <p data-reveal-item>Animation plus vive grâce à l'easing expo.out.</p>
+      <p data-reveal-item>Troisième élément animé avec le même stagger.</p>
+    </section>
+
+    <script type="module" src="./reveal.js"></script>
+  </body>
+</html>

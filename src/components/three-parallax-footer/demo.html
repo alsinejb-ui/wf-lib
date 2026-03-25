@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Three Parallax Footer | Demo</title>
+    <link rel="stylesheet" href="./three-parallax-footer.css" />
+    <style>
+      html,
+      body {
+        width: 100%;
+        min-height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      data-component="three-parallax-footer"
+      data-tpf-model-url="./public/model.glb"
+      data-tpf-lenis="false"
+      data-tpf-model-opacity="0.5"
+      data-tpf-parallax-y="-35"
+    >
+      <section data-tpf-demo-section="one"><h1>Section 1</h1></section>
+      <section data-tpf-demo-section="two"><h1>Section 2</h1></section>
+      <section data-tpf-demo-section="three"><h1>Section 3</h1></section>
+
+      <footer data-tpf-trigger>
+        <div data-tpf-footer-container>
+          <div data-tpf-canvas></div>
+          <div data-tpf-content>
+            <div data-tpf-row data-tpf-row="top">
+              <div data-tpf-col="main">
+                <h2>Restoring meaning to the things we build</h2>
+              </div>
+              <div data-tpf-col="links">
+                <div data-tpf-sub-col>
+                  <h3>Work resumes</h3>
+                  <h3>2026</h3>
+                </div>
+                <div data-tpf-sub-col>
+                  <a href="#">Write to me</a>
+                  <a href="#">Professional orbit</a>
+                  <a href="#">Loose thoughts</a>
+                  <a href="#">Long form</a>
+                </div>
+              </div>
+            </div>
+            <div data-tpf-row data-tpf-row="bottom">
+              <p>Experiment 518</p>
+              <p>Built by Codegrid</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="module" src="./three-parallax-footer.js"></script>
+  </body>
+</html>

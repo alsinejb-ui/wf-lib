@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inkwell Image Gallery | Demo</title>
+    <link rel="stylesheet" href="./inkwell-image-gallery.css" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        min-height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-component="inkwell-image-gallery">
+      <nav data-iwg-nav>
+        <a href="#">Silhouette Stock</a>
+        <p>Download Assets</p>
+      </nav>
+
+      <div data-iwg-container>
+        <div data-iwg-gallery-container>
+          <div data-iwg-gallery></div>
+        </div>
+        <div data-iwg-title-container></div>
+      </div>
+
+      <button data-iwg-close type="button">Close</button>
+
+      <footer data-iwg-footer>
+        <p>Test xp</p>
+        <div data-iwg-progress-indicator>
+          <div data-iwg-progress-track>
+            <div data-iwg-progress-fill></div>
+          </div>
+        </div>
+        <p>☕️👩‍💻</p>
+      </footer>
+    </div>
+
+    <script type="module" src="./inkwell-image-gallery.js"></script>
+  </body>
+</html>

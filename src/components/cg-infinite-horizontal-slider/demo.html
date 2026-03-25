@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CG Infinite Horizontal Slider | Motion Core</title>
+    <link rel="stylesheet" href="./cg-infinite-horizontal-slider.css" />
+    <style>
+      html, body { margin: 0; background: #0f0f0f; color: #fff; font-family: system-ui, sans-serif; }
+      [data-component="cg-infinite-horizontal-slider"] { width: 100%; height: 100svh; }
+      .mc-console { position: fixed; bottom: 1rem; left: 1rem; max-width: 320px; padding: 1rem; background: rgba(0,0,0,0.85); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; font-family: monospace; font-size: 0.75rem; z-index: 10; }
+      .mc-console h3 { margin: 0 0 0.75rem; font-size: 0.8rem; }
+      .mc-console label { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.5rem; }
+      .mc-console input[type="range"] { width: 120px; accent-color: #fff; }
+      .mc-console .value { min-width: 2rem; text-align: right; opacity: 0.8; }
+    </style>
+  </head>
+  <body>
+    <div
+      data-component="cg-infinite-horizontal-slider"
+      data-cgih-scroll-speed="1.75"
+      data-cgih-lerp="0.05"
+      data-cgih-parallax="0.25"
+      data-cgih-slides='[
+        {"title":"Echoes of Silence","img":"./public/slider_img_01.jpg","url":"#"},
+        {"title":"Floral Circuit","img":"./public/slider_img_02.jpg","url":"#"},
+        {"title":"Synthetic Horizon","img":"./public/slider_img_03.jpg","url":"#"},
+        {"title":"Portal Sequence","img":"./public/slider_img_04.jpg","url":"#"},
+        {"title":"Projected Memory","img":"./public/slider_img_05.jpg","url":"#"},
+        {"title":"Fractured Self","img":"./public/slider_img_06.jpg","url":"#"},
+        {"title":"Moonlit Constructs","img":"./public/slider_img_07.jpg","url":"#"},
+        {"title":"Fading Room","img":"./public/slider_img_08.jpg","url":"#"}
+      ]'
+    >
+      <div data-cgih-track></div>
+    </div>
+
+    <aside class="mc-console" aria-label="Contrôles">
+      <h3>Console</h3>
+      <label><span>Scroll speed</span><input type="range" id="cgih-speed" min="50" max="400" value="175" /><span class="value" id="cgih-speed-value">1.75</span></label>
+      <label><span>Parallax</span><input type="range" id="cgih-parallax" min="0" max="50" value="25" /><span class="value" id="cgih-parallax-value">0.25</span></label>
+    </aside>
+
+    <script type="module" src="./cg-infinite-horizontal-slider.js"></script>
+    <script type="module">
+      import { initCgInfiniteHorizontalSlider } from "./cg-infinite-horizontal-slider.js";
+      const root = document.querySelector('[data-component="cg-infinite-horizontal-slider"]');
+      const speedInput = document.getElementById("cgih-speed");
+      const parallaxInput = document.getElementById("cgih-parallax");
+      function apply() {
+        root.setAttribute("data-cgih-scroll-speed", (speedInput.value / 100).toFixed(2));
+        root.setAttribute("data-cgih-parallax", (parallaxInput.value / 100).toFixed(2));
+        document.getElementById("cgih-speed-value").textContent = (speedInput.value / 100).toFixed(2);
+        document.getElementById("cgih-parallax-value").textContent = (parallaxInput.value / 100).toFixed(2);
+        initCgInfiniteHorizontalSlider(root);
+      }
+      speedInput.addEventListener("input", apply);
+      parallaxInput.addEventListener("input", apply);
+      apply();
+    </script>
+  </body>
+</html>

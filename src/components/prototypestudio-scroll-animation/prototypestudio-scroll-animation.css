@@ -1,0 +1,103 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap");
+
+[data-component="prototypestudio-scroll-animation"] {
+  --psa-bg: #141414;
+  --psa-text: #fff;
+  font-family: "DM Sans", sans-serif;
+  background-color: var(--psa-bg);
+  color: var(--psa-text);
+}
+
+[data-component="prototypestudio-scroll-animation"] * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+[data-component="prototypestudio-scroll-animation"] img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+[data-component="prototypestudio-scroll-animation"] h1 {
+  text-transform: uppercase;
+  font-size: clamp(3rem, 5vw, 7rem);
+  font-weight: 400;
+  line-height: 1;
+}
+
+[data-component="prototypestudio-scroll-animation"] p {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+[data-component="prototypestudio-scroll-animation"] section {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  padding: 2rem;
+  overflow: hidden;
+  background-color: var(--psa-bg);
+}
+
+[data-component="prototypestudio-scroll-animation"] [data-psa-intro],
+[data-component="prototypestudio-scroll-animation"] [data-psa-outro] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+[data-component="prototypestudio-scroll-animation"] [data-psa-images] {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 35%;
+  padding: 50svh 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: -1;
+}
+
+[data-component="prototypestudio-scroll-animation"] .psa-project-img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+  overflow: hidden;
+}
+
+[data-component="prototypestudio-scroll-animation"] [data-psa-names] {
+  position: absolute;
+  right: 2rem;
+  bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+[data-component="prototypestudio-scroll-animation"] [data-psa-names] p {
+  color: #4a4a4a;
+  transition: color 0.3s ease;
+}
+
+[data-component="prototypestudio-scroll-animation"] [data-psa-index],
+[data-component="prototypestudio-scroll-animation"] [data-psa-images],
+[data-component="prototypestudio-scroll-animation"] [data-psa-names] p {
+  will-change: transform;
+}
+
+@media (max-width: 1000px) {
+  [data-component="prototypestudio-scroll-animation"] [data-psa-images] {
+    width: calc(100% - 4rem);
+    gap: 25svh;
+  }
+
+  [data-component="prototypestudio-scroll-animation"] [data-psa-names] p {
+    color: #fff !important;
+  }
+}

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sageeast 3D Scroll | Demo</title>
+    <link rel="stylesheet" href="./sageeast-3d-scroll.css" />
+    <style>
+      * { margin: 0; padding: 0; }
+      html, body { width: 100%; min-height: 100%; background: #000; }
+    </style>
+  </head>
+  <body>
+    <div
+      data-component="sageeast-3d-scroll"
+      data-sg-scrub="1"
+      data-sg-slides='[
+        {"image": "./public/1.jpg", "title": "Neo Elegance°", "index": "( ES 2023 0935 )"},
+        {"image": "./public/2.jpg", "title": "Future Luxe", "index": "( ES 2023 0936 )"},
+        {"image": "./public/3.jpg", "title": "Cyber Glam", "index": "( ES 2023 0937 )"},
+        {"image": "./public/4.jpg", "title": "Visionary Threads", "index": "( ES 2023 0938 )"},
+        {"image": "./public/5.jpg", "title": "Galactic Chic", "index": "( ES 2023 0939 )"},
+        {"image": "./public/6.jpg", "title": "Tech Sophistication", "index": "( ES 2023 0940 )"},
+        {"image": "./public/7.jpg", "title": "Avant Edge", "index": "( ES 2023 0941 )"},
+        {"image": "./public/8.jpg", "title": "Moda Futura", "index": "( ES 2023 0942 )"},
+        {"image": "./public/9.jpg", "title": "Eco Futurist", "index": "( ES 2023 0943 )"},
+        {"image": "./public/10.jpg", "title": "Sleek Tomorrow", "index": "( ES 2023 0944 )"}
+      ]'
+    >
+      <div data-sg-container></div>
+      <div data-sg-active></div>
+      <div data-sg-slider></div>
+    </div>
+
+    <script type="module" src="./sageeast-3d-scroll.js"></script>
+  </body>
+</html>

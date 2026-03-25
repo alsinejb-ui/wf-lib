@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bennett & Clive Scroll Animation | Demo</title>
+    <link rel="stylesheet" href="./bennett-clive-scroll-anim.css" />
+    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/pp-neue-montreal" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        min-height: 100%;
+        font-family: "PP Neue Montreal", sans-serif;
+        overscroll-behavior: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-component="bennett-clive-scroll-anim">
+      <div data-bc-sticky>
+        <div data-bc-item><p>Barrett</p></div>
+        <div data-bc-item><p>&</p></div>
+        <div data-bc-item><p>Hale</p></div>
+      </div>
+
+      <section data-bc-hero>
+        <img src="./public/hero.jpg" alt="" />
+      </section>
+
+      <section data-bc-clients>
+        <div data-bc-row><div data-bc-logo><p>Logo 1</p></div><div data-bc-logo><p>Logo 2</p></div></div>
+        <div data-bc-row><div data-bc-logo><p>Logo 3</p></div><div data-bc-logo><p>Logo 4</p></div></div>
+        <div data-bc-row><div data-bc-logo><p>Logo 5</p></div><div data-bc-logo><p>Logo 6</p></div></div>
+        <div data-bc-row><div data-bc-logo><p>Logo 7</p></div><div data-bc-logo><p>Logo 8</p></div></div>
+        <div data-bc-row><div data-bc-logo><p>Logo 9</p></div><div data-bc-logo><p>Logo 10</p></div></div>
+        <div data-bc-row><div data-bc-logo><p>Logo 11</p></div><div data-bc-logo><p>Logo 12</p></div></div>
+        <div data-bc-row><div data-bc-logo><p>Logo 13</p></div><div data-bc-logo><p>Logo 14</p></div></div>
+        <div data-bc-row><div data-bc-logo><p>Logo 15</p></div><div data-bc-logo><p>Logo 16</p></div></div>
+        <div data-bc-row><div data-bc-logo><p>Logo 17</p></div><div data-bc-logo><p>Logo 18</p></div></div>
+        <div data-bc-row><div data-bc-logo><p>Logo 19</p></div><div data-bc-logo><p>Logo 20</p></div></div>
+        <div data-bc-row><div data-bc-logo><p>Logo 21</p></div><div data-bc-logo><p>Logo 22</p></div></div>
+        <div data-bc-row><div data-bc-logo><p>Logo 23</p></div><div data-bc-logo><p>Logo 24</p></div></div>
+      </section>
+
+      <section data-bc-trigger-footer>
+        <img src="./public/footer.jpg" alt="" />
+      </section>
+    </div>
+
+    <script type="module" src="./bennett-clive-scroll-anim.js"></script>
+  </body>
+</html>

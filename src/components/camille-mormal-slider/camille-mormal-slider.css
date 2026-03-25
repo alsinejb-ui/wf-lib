@@ -1,0 +1,192 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+[data-component="camille-mormal-slider"] {
+  --cms-text: #fff;
+  --cms-nav-inactive: 0.5;
+  font-family: "Inter", sans-serif;
+}
+
+[data-component="camille-mormal-slider"] * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+[data-component="camille-mormal-slider"] img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+[data-component="camille-mormal-slider"] a,
+[data-component="camille-mormal-slider"] p {
+  text-decoration: none;
+  color: var(--cms-text);
+  font-size: 14px;
+}
+
+[data-component="camille-mormal-slider"] [data-cms-nav],
+[data-component="camille-mormal-slider"] nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  padding: 2em;
+  display: flex;
+  justify-content: center;
+  gap: 2em;
+  z-index: 2;
+}
+
+[data-component="camille-mormal-slider"] [data-cms-nav] a,
+[data-component="camille-mormal-slider"] nav a {
+  opacity: var(--cms-nav-inactive);
+}
+
+[data-component="camille-mormal-slider"] [data-cms-nav] a#active,
+[data-component="camille-mormal-slider"] nav a#active {
+  opacity: 1;
+}
+
+[data-component="camille-mormal-slider"] [data-cms-slider],
+[data-component="camille-mormal-slider"] .slider {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+[data-component="camille-mormal-slider"] .slider-images {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+[data-component="camille-mormal-slider"] .img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+[data-component="camille-mormal-slider"] .slider-counter {
+  position: absolute;
+  bottom: 2em;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 24px;
+  display: flex;
+  gap: 0.5em;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+[data-component="camille-mormal-slider"] .slider-counter > div {
+  flex: 1;
+}
+
+[data-component="camille-mormal-slider"] .slider-counter p {
+  line-height: 20px;
+}
+
+[data-component="camille-mormal-slider"] .counter {
+  position: relative;
+  top: 0;
+  will-change: transform;
+}
+
+[data-component="camille-mormal-slider"] .slider-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 64px;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+[data-component="camille-mormal-slider"] .slider-title-wrapper {
+  position: relative;
+  width: 100%;
+  top: 0;
+  text-align: center;
+  will-change: transform;
+}
+
+[data-component="camille-mormal-slider"] .slider-title-wrapper p {
+  font-size: 50px;
+  line-height: 60px;
+}
+
+[data-component="camille-mormal-slider"] .slider-indicators {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 75%;
+  display: flex;
+  justify-content: space-between;
+}
+
+[data-component="camille-mormal-slider"] .slider-indicators p {
+  position: relative;
+  font-size: 40px;
+  font-weight: 200;
+  will-change: transform;
+}
+
+[data-component="camille-mormal-slider"] .slider-preview {
+  position: absolute;
+  bottom: 2em;
+  right: 2em;
+  width: 35%;
+  height: 50px;
+  display: flex;
+  gap: 1em;
+}
+
+[data-component="camille-mormal-slider"] .preview {
+  position: relative;
+  flex: 1;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+[data-component="camille-mormal-slider"] .preview::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  transition: 0.3s ease-in-out;
+}
+
+[data-component="camille-mormal-slider"] .preview.active::after {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+[data-component="camille-mormal-slider"] .preview-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  transform-origin: left center;
+  z-index: 1;
+}
+
+@media (max-width: 900px) {
+  [data-component="camille-mormal-slider"] .slider-indicators {
+    width: 90%;
+  }
+
+  [data-component="camille-mormal-slider"] .slider-preview {
+    width: 90%;
+    bottom: 5em;
+  }
+
+  [data-component="camille-mormal-slider"] .slider-title-wrapper p {
+    font-size: 30px;
+  }
+}

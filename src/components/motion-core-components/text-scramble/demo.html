@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text Scramble | Motion Core</title>
+    <link rel="stylesheet" href="./text-scramble.css" />
+    <style>
+      html, body { margin: 0; background: #111; color: #0f0; padding: 4rem; font-size: 1.5rem; min-height: 150vh; }
+      .mc-console { position: fixed; bottom: 1rem; left: 1rem; max-width: 320px; padding: 1rem; background: rgba(0,0,0,0.85); border: 1px solid rgba(0,255,0,0.3); border-radius: 8px; font-family: monospace; font-size: 0.75rem; z-index: 10; color: #0f0; }
+      .mc-console h3 { margin: 0 0 0.75rem; font-size: 0.8rem; }
+      .mc-console label { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.5rem; }
+      .mc-console input[type="range"] { width: 120px; accent-color: #0f0; }
+      .mc-console button { padding: 0.5rem 1rem; background: #0f0; color: #000; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; }
+      .mc-console .value { min-width: 3rem; text-align: right; opacity: 0.8; }
+    </style>
+  </head>
+  <body>
+    <div data-component="text-scramble">
+      <h1 data-ts-text="Hello, Motion Core" data-ts-duration="1500"></h1>
+      <p data-ts-text="Ce texte se déchiffre au scroll." data-ts-duration="2000"></p>
+    </div>
+    <aside class="mc-console" aria-label="Contrôles">
+      <h3>Console</h3>
+      <label><span>Duration</span><input type="range" id="ts-duration" min="500" max="5000" value="1500" /><span class="value" id="ts-duration-value">1.5s</span></label>
+      <button type="button" id="ts-replay">Replay</button>
+    </aside>
+    <script type="module" src="./text-scramble.js"></script>
+    <script type="module">
+      import { initTextScramble } from "./text-scramble.js";
+      const root = document.querySelector('[data-component="text-scramble"]');
+      const targets = root.querySelectorAll("[data-ts-text]");
+      const durationInput = document.getElementById("ts-duration");
+      const durationValue = document.getElementById("ts-duration-value");
+      const replayBtn = document.getElementById("ts-replay");
+      function apply() { const v = durationInput.value; targets.forEach(t => t.setAttribute("data-ts-duration", v)); durationValue.textContent = (v/1000).toFixed(1) + "s"; }
+      function replay() { targets.forEach(t => { t.textContent = ""; }); apply(); initTextScramble(root); }
+      durationInput.addEventListener("input", apply);
+      replayBtn.addEventListener("click", replay);
+      apply();
+      initTextScramble(root);
+    </script>
+  </body>
+</html>

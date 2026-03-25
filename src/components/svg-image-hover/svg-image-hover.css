@@ -1,0 +1,55 @@
+/* svg-image-hover — styles scopés composant uniquement */
+/* Les styles de mise en page (body, .row, header/footer) sont dans la demo */
+
+[data-component="svg-image-hover"] [data-svg-hover-card] {
+  position: relative;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+[data-component="svg-image-hover"] .card-img {
+  width: 100%;
+  height: 100%;
+}
+
+[data-component="svg-image-hover"] .card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+[data-component="svg-image-hover"] .svg-stroke {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.5);
+  width: 100%;
+  height: 100%;
+}
+
+[data-component="svg-image-hover"] .svg-stroke svg,
+[data-component="svg-image-hover"] .svg-stroke path {
+  width: 100%;
+  height: 100%;
+}
+
+[data-component="svg-image-hover"] .card-title {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  color: var(--svg-hover-copy, #000);
+  line-height: 1.25;
+}
+
+/* Word mask pour l'animation du titre */
+[data-component="svg-image-hover"] .wf-lib-word-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+[data-component="svg-image-hover"] .wf-lib-svg-hover-word {
+  display: inline-block;
+  will-change: transform;
+}

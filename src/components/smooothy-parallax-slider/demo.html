@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smooothy Parallax Slider | wf-lib</title>
+    <link rel="stylesheet" href="./smooothy-parallax-slider.css" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        background: #0a0a0a;
+        color: #fff;
+        font-family: system-ui, sans-serif;
+      }
+      [data-component="smooothy-parallax-slider"] {
+        min-height: 60vh;
+        display: flex;
+        align-items: center;
+      }
+      .demo-header {
+        padding: 2rem 1.5rem;
+        text-align: center;
+      }
+      .demo-header h1 {
+        font-size: 1.25rem;
+        font-weight: 500;
+        margin: 0 0 0.5rem;
+      }
+      .demo-header p {
+        font-size: 0.875rem;
+        opacity: 0.7;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="demo-header">
+      <h1>Parallax</h1>
+      <p>Effet parallax sur les slides — drag ou scroll pour naviguer.</p>
+    </header>
+
+    <div
+      data-component="smooothy-parallax-slider"
+      data-sps-parallax-strength="20"
+      data-sps-slides='[
+        {"img":"https://picsum.photos/800/600?random=1","alt":"Slide 1"},
+        {"img":"https://picsum.photos/800/600?random=2","alt":"Slide 2"},
+        {"img":"https://picsum.photos/800/600?random=3","alt":"Slide 3"},
+        {"img":"https://picsum.photos/800/600?random=4","alt":"Slide 4"},
+        {"img":"https://picsum.photos/800/600?random=5","alt":"Slide 5"},
+        {"img":"https://picsum.photos/800/600?random=6","alt":"Slide 6"},
+        {"img":"https://picsum.photos/800/600?random=7","alt":"Slide 7"},
+        {"img":"https://picsum.photos/800/600?random=8","alt":"Slide 8"},
+        {"img":"https://picsum.photos/800/600?random=9","alt":"Slide 9"}
+      ]'
+    >
+      <div data-sps-track></div>
+    </div>
+
+    <script type="module" src="./smooothy-parallax-slider.js"></script>
+  </body>
+</html>

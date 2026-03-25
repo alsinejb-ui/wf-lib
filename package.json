@@ -1,0 +1,33 @@
+{
+  "name": "wf-lib",
+  "version": "1.0.0",
+  "description": "Vanilla Webflow component library (HTML/CSS/JS/GSAP)",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "build:components": "node scripts/build.js",
+    "build:all": "npm run build && npm run build:components",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "webflow",
+    "gsap",
+    "vanilla-js",
+    "component-library"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "gsap": "^3.13.0",
+    "lenis": "^1.3.19",
+    "locomotive-scroll": "^5.0.1",
+    "three": "^0.180.0"
+  },
+  "devDependencies": {
+    "vite": "^5.4.21",
+    "webflow-clipboard": "^1.0.3"
+  }
+}

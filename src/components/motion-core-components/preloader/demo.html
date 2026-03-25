@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Preloader | Motion Core</title>
+    <link rel="stylesheet" href="./preloader.css" />
+    <style>
+      html, body { margin: 0; background: #111; color: #fff; min-height: 100vh; }
+      .content { padding: 4rem; }
+      .mc-console { position: fixed; bottom: 1rem; left: 1rem; max-width: 320px; padding: 1rem; background: rgba(0,0,0,0.85); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; font-family: monospace; font-size: 0.75rem; z-index: 10000; }
+      .mc-console h3 { margin: 0 0 0.75rem; font-size: 0.8rem; }
+      .mc-console label { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.5rem; }
+      .mc-console input[type="range"] { width: 120px; accent-color: #fff; }
+      .mc-console button { padding: 0.5rem 1rem; background: #fff; color: #000; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; }
+      .mc-console .value { min-width: 3rem; text-align: right; opacity: 0.8; }
+    </style>
+  </head>
+  <body>
+    <div data-component="preloader" data-pl-duration="2500" data-pl-done="Done">
+      <div data-pl-track>
+        <div data-pl-bar></div>
+      </div>
+      <span data-pl-text>0%</span>
+    </div>
+    <div class="content" style="display:none" id="main">
+      <h1>Contenu chargé</h1>
+    </div>
+    <aside class="mc-console" aria-label="Contrôles">
+      <h3>Console</h3>
+      <label><span>Duration</span><input type="range" id="pl-duration" min="500" max="5000" value="2500" /><span class="value" id="pl-duration-value">2.5s</span></label>
+      <button type="button" id="pl-replay">Relancer</button>
+    </aside>
+    <script type="module">
+      import { initPreloader } from "./preloader.js";
+      const pl = document.querySelector('[data-component="preloader"]');
+      const main = document.getElementById("main");
+      const bar = pl.querySelector("[data-pl-bar]");
+      const text = pl.querySelector("[data-pl-text]");
+      const durationInput = document.getElementById("pl-duration");
+      const durationValue = document.getElementById("pl-duration-value");
+      const replayBtn = document.getElementById("pl-replay");
+
+      function reset() {
+        pl.style.display = "flex";
+        pl.style.opacity = "1";
+        pl.style.pointerEvents = "auto";
+        main.style.display = "none";
+        bar.style.width = "0";
+        text.textContent = "0%";
+      }
+
+      function run() {
+        pl.setAttribute("data-pl-duration", durationInput.value);
+        durationValue.textContent = (durationInput.value/1000).toFixed(1) + "s";
+        initPreloader(pl);
+      }
+
+      pl.addEventListener("preloader-complete", () => { main.style.display = "block"; });
+
+      replayBtn.addEventListener("click", () => { reset(); run(); });
+
+      durationInput.addEventListener("input", () => durationValue.textContent = (durationInput.value/1000).toFixed(1) + "s");
+
+      run();
+    </script>
+  </body>
+</html>

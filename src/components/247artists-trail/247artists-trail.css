@@ -1,0 +1,73 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@100;200;300;400;500;600;700&display=swap");
+
+[data-component="247artists-trail"] {
+  --trail-bg: #101010;
+  --trail-text: #4e4e4e;
+  --trail-image-opacity: 0.2;
+  --trail-image-size: 175px;
+  position: relative;
+}
+
+[data-component="247artists-trail"] * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+[data-component="247artists-trail"] p {
+  color: var(--trail-text);
+  text-transform: uppercase;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.85rem;
+  z-index: 3;
+}
+
+[data-component="247artists-trail"] .trail-hero {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.35rem;
+  overflow: hidden;
+  background: var(--trail-bg);
+}
+
+[data-component="247artists-trail"] .trail-hero-img {
+  position: absolute;
+  inset: 0;
+  opacity: var(--trail-image-opacity);
+  background-size: cover;
+  background-position: center;
+}
+
+[data-component="247artists-trail"] .trail-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 2;
+}
+
+[data-component="247artists-trail"] .trail-img {
+  position: absolute;
+  width: var(--trail-image-size);
+  height: var(--trail-image-size);
+  pointer-events: none;
+}
+
+[data-component="247artists-trail"] .trail-img .mask-layer {
+  position: absolute;
+  inset: 0;
+  background-color: #000;
+  will-change: clip-path;
+}
+
+[data-component="247artists-trail"] .trail-img .mask-layer .image-layer {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+}

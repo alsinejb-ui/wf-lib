@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PrototypeStudio Scroll Animation | Demo</title>
+    <link rel="stylesheet" href="./prototypestudio-scroll-animation.css" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        min-height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      data-component="prototypestudio-scroll-animation"
+      data-psa-lenis="true"
+      data-psa-scrub="1"
+      data-psa-pin-multiplier="5"
+      data-psa-slides='[
+        {"title":"Human Form Study","image":"../elementis-scroll/public/img1.jpg"},
+        {"title":"Interior Light","image":"../elementis-scroll/public/img2.jpg"},
+        {"title":"Project 21","image":"../elementis-scroll/public/img3.jpg"},
+        {"title":"Shadow Portraits","image":"../elementis-scroll/public/img4.jpg"},
+        {"title":"Everyday Objects","image":"../elementis-scroll/public/img5.jpg"},
+        {"title":"Unit 07 Care","image":"../fractal-glass-effect/public/hero.jpg"},
+        {"title":"Motion Practice","image":"../fractal-glass-effect/public/hero2.jpg"},
+        {"title":"Noonlight Series","image":"../fractal-glass-effect/public/hero3.jpg"},
+        {"title":"Material Stillness","image":"../fractal-glass-effect/public/hero4.jpg"},
+        {"title":"Quiet Walk","image":"../elementis-scroll/public/img1.jpg"}
+      ]'
+    >
+      <section data-psa-intro>
+        <p>A collection of selected works</p>
+      </section>
+
+      <section data-psa-spotlight>
+        <div class="project-index">
+          <h1 data-psa-index>01/10</h1>
+        </div>
+        <div data-psa-images></div>
+        <div data-psa-names></div>
+      </section>
+
+      <section data-psa-outro>
+        <p>Scroll complete</p>
+      </section>
+    </div>
+
+    <script type="module" src="./prototypestudio-scroll-animation.js"></script>
+  </body>
+</html>

@@ -1,0 +1,219 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap");
+
+[data-component="stories"] {
+  --stories-bg: #000;
+  --stories-text: #fff;
+  --stories-overlay: rgba(255, 255, 255, 0.05);
+  --stories-index-bg: rgba(255, 255, 255, 0.25);
+  width: 100%;
+}
+
+[data-component="stories"] * {
+  box-sizing: border-box;
+}
+
+[data-component="stories"] [data-stories-container] {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  cursor: none;
+}
+
+[data-component="stories"] [data-stories-cursor] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--stories-overlay);
+  backdrop-filter: blur(10px);
+  border-radius: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+[data-component="stories"] [data-stories-cursor] p {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--stories-text);
+  margin: 0;
+}
+
+[data-component="stories"] [data-stories-img] {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  opacity: 0.5;
+}
+
+[data-component="stories"] .stories-img-item {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+[data-component="stories"] .stories-img-item img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+[data-component="stories"] [data-stories-content] {
+  position: absolute;
+  padding: 3em;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+[data-component="stories"] [data-stories-row] {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1em;
+}
+
+[data-component="stories"] [data-stories-row]:first-child {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+[data-component="stories"] [data-stories-indices] {
+  width: 100%;
+  height: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.25em;
+}
+
+[data-component="stories"] .stories-index {
+  position: relative;
+  flex: 1;
+  height: 1px;
+  background: var(--stories-index-bg);
+}
+
+[data-component="stories"] .stories-index-highlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: var(--stories-text);
+  transform-origin: left center;
+}
+
+[data-component="stories"] [data-stories-profile] {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+}
+
+[data-component="stories"] [data-stories-profile-icon] {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+[data-component="stories"] [data-stories-profile-icon] img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+[data-component="stories"] [data-stories-profile-name] {
+  position: relative;
+  width: 200px;
+  height: 24px;
+  overflow: hidden;
+}
+
+[data-component="stories"] [data-stories-profile-name] p {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  font-size: 16px;
+  color: var(--stories-text);
+  font-family: "DM Sans", sans-serif;
+}
+
+[data-component="stories"] [data-stories-title] {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+[data-component="stories"] .stories-title-row {
+  position: relative;
+  width: 100%;
+  height: 48px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+[data-component="stories"] .stories-title-row h1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  font-size: 36px;
+  font-weight: 400;
+  color: var(--stories-text);
+  font-family: "DM Sans", sans-serif;
+}
+
+[data-component="stories"] [data-stories-link] {
+  display: inline-block;
+  margin: 2em 0;
+  padding: 0.25em 0;
+  font-size: 16px;
+  color: var(--stories-text);
+  text-decoration: none;
+  font-family: "DM Sans", sans-serif;
+}
+
+[data-component="stories"] [data-stories-link]::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--stories-text);
+}
+
+[data-component="stories"] [data-stories-link] {
+  position: relative;
+}
+
+@media (max-width: 900px) {
+  [data-component="stories"] [data-stories-container] {
+    cursor: default;
+  }
+
+  [data-component="stories"] [data-stories-cursor] {
+    display: none;
+  }
+
+  [data-component="stories"] [data-stories-content] {
+    width: 100%;
+    padding: 2em;
+  }
+}

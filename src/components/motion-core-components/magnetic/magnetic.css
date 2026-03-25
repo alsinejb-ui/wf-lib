@@ -1,0 +1,11 @@
+[data-component="magnetic"] {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 2rem;
+}
+
+[data-component="magnetic"] [data-magnetic-item] {
+  transition: transform 0.1s ease-out;
+  will-change: transform;
+}

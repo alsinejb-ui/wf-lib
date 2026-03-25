@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Telescope Scroll | Demo</title>
+    <link rel="stylesheet" href="./telescope-scroll.css" />
+    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/pp-neue-montreal" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "PP Neue Montreal", sans-serif;
+      }
+
+      section {
+        position: relative;
+        width: 100%;
+        min-height: 100svh;
+        overflow: hidden;
+      }
+
+      .intro,
+      .outro {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #0f0f0f;
+        color: #fff;
+      }
+
+      .intro h1,
+      .outro h1 {
+        width: 50%;
+        text-align: center;
+        font-size: 4rem;
+        font-weight: 500;
+        line-height: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="intro">
+      <h1>A curated series of surreal frames.</h1>
+    </section>
+
+    <div
+      data-component="telescope-scroll"
+      data-telescope-scroll-lenis="true"
+      data-telescope-scroll-height="10"
+      data-telescope-scroll-scrub="1"
+      data-telescope-scroll-items='[
+        {"name": "Silent Arc", "img": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=800&q=85"},
+        {"name": "Bloom24", "img": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=85"},
+        {"name": "Glass Fade", "img": "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=800&q=85"},
+        {"name": "Echo 9", "img": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&q=85"},
+        {"name": "Velvet Loop", "img": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&q=85"},
+        {"name": "Field Two", "img": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=800&q=85"},
+        {"name": "Pale Thread", "img": "https://images.unsplash.com/photo-1529626455594-4ff0802cfb5e?w=800&q=85"},
+        {"name": "Stillroom", "img": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=85"},
+        {"name": "Ghostline", "img": "https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=800&q=85"},
+        {"name": "Mono 73", "img": "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=800&q=85"}
+      ]'
+    >
+      <section data-telescope-scroll-trigger style="position: relative; width: 100%; height: 100svh; background: #0f0f0f;">
+        <div data-telescope-scroll-intro>
+          <div data-telescope-scroll-intro-left><p>Beneath</p></div>
+          <div data-telescope-scroll-intro-right><p>Beyond</p></div>
+        </div>
+
+        <div data-telescope-scroll-bg>
+          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1920&q=90" alt="" />
+        </div>
+
+        <div data-telescope-scroll-titles-container>
+          <div data-telescope-scroll-titles></div>
+        </div>
+
+        <div data-telescope-scroll-images></div>
+
+        <div data-telescope-scroll-header>
+          <p>Discover</p>
+        </div>
+      </section>
+    </div>
+
+    <section class="outro">
+      <h1>Moments in still motion.</h1>
+    </section>
+
+    <script type="module" src="./telescope-scroll.js"></script>
+  </body>
+</html>

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inversa Scroll Animation | Demo</title>
+    <link rel="stylesheet" href="./inversa-scroll-animation.css" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        min-height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      data-component="inversa-scroll-animation"
+      data-inversa-lenis="true"
+      data-inversa-scrub="1"
+      data-inversa-pin-multiplier="4"
+    >
+      <section data-inversa-hero>
+        <div data-inversa-img>
+          <img src="../fractal-glass-effect/public/hero3.jpg" alt="" />
+        </div>
+
+        <div data-inversa-mask></div>
+
+        <div data-inversa-grid>
+          <img src="./public/grid-overlay.svg" alt="" />
+        </div>
+
+        <div data-inversa-marker="1">
+          <span class="inversa-marker-icon"></span>
+          <p class="inversa-marker-label">Anchor Field</p>
+        </div>
+
+        <div data-inversa-marker="2">
+          <span class="inversa-marker-icon"></span>
+          <p class="inversa-marker-label">Drift Field</p>
+        </div>
+
+        <div data-inversa-content>
+          <div class="inversa-content-block">
+            <div class="inversa-content-copy">
+              <h1>Location Framework</h1>
+            </div>
+          </div>
+          <div class="inversa-content-block">
+            <div class="inversa-content-copy">
+              <h2>Coordinate Mapping</h2>
+              <p>
+                Terrain data is interpreted through directional vectors.
+                Movement responds to relative position rather than absolute
+                distance.
+              </p>
+            </div>
+          </div>
+          <div class="inversa-content-block">
+            <div class="inversa-content-copy">
+              <h2>Active Locations</h2>
+              <p>
+                Key points are indexed within the field. Each location functions
+                as a reference for spatial alignment and transition logic.
+              </p>
+            </div>
+          </div>
+          <div class="inversa-content-block">
+            <div class="inversa-content-copy">
+              <h2>Spatial Center</h2>
+              <p>
+                The system converges toward a balanced focal region. Motion
+                decelerates as positional variance reaches equilibrium.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div data-inversa-progress></div>
+      </section>
+
+      <section data-inversa-outro>
+        <p>The system has reached its final spatial state.</p>
+      </section>
+    </div>
+
+    <script type="module" src="./inversa-scroll-animation.js"></script>
+  </body>
+</html>

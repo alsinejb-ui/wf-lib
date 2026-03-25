@@ -1,0 +1,107 @@
+[data-component="telescope-img-scroll"] {
+  --telescope-bg: #e3e3db;
+  --telescope-text: #141414;
+  --telescope-header-text: #e3e3db;
+}
+
+[data-component="telescope-img-scroll"] * {
+  box-sizing: border-box;
+}
+
+[data-component="telescope-img-scroll"] [data-telescope-container] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+}
+
+[data-component="telescope-img-scroll"] [data-telescope-img],
+[data-component="telescope-img-scroll"] [data-telescope-layer] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+}
+
+[data-component="telescope-img-scroll"] [data-telescope-img] img,
+[data-component="telescope-img-scroll"] [data-telescope-layer] img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+[data-component="telescope-img-scroll"] [data-telescope-layer] {
+  --telescope-mask: radial-gradient(circle at center, black 35%, transparent 65%);
+  -webkit-mask-image: var(--telescope-mask);
+  mask-image: var(--telescope-mask);
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+[data-component="telescope-img-scroll"] [data-telescope-header] {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 75%;
+  text-align: center;
+  color: var(--telescope-header-text);
+  z-index: 2;
+}
+
+[data-component="telescope-img-scroll"] [data-telescope-header] h1 {
+  font-size: 4rem;
+  line-height: 1.1;
+  margin: 0;
+}
+
+[data-component="telescope-img-scroll"] .telescope-word-mask {
+  display: inline-block;
+}
+
+[data-component="telescope-img-scroll"] .telescope-word {
+  display: inline-block;
+}
+
+[data-component="telescope-img-scroll"] [data-telescope-intro] {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  width: 100%;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 10;
+  pointer-events: none;
+}
+
+[data-component="telescope-img-scroll"] [data-telescope-intro-item] {
+  flex: 1;
+  position: relative;
+  will-change: transform;
+}
+
+[data-component="telescope-img-scroll"] [data-telescope-intro-item]:first-child {
+  display: flex;
+  justify-content: flex-end;
+}
+
+[data-component="telescope-img-scroll"] [data-telescope-intro-item] h1 {
+  font-size: 4rem;
+  line-height: 1.1;
+  margin: 0;
+}
+
+@media (max-width: 1000px) {
+  [data-component="telescope-img-scroll"] [data-telescope-header],
+  [data-component="telescope-img-scroll"] [data-telescope-intro-item] h1 {
+    width: calc(100% - 4rem);
+    font-size: 2.5rem;
+  }
+}

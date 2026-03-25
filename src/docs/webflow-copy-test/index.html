@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>wf-lib — Test « Copy to Webflow » (Xscp)</title>
+    <style>
+      :root {
+        --bg: #f4f3f0;
+        --card: #fff;
+        --border: #d8d6d0;
+        --text: #1a1917;
+        --muted: #5c5a55;
+        --accent: #146ef5;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.5;
+        padding: 2rem clamp(1rem, 4vw, 3rem);
+        max-width: 52rem;
+      }
+      h1 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 0 0 0.5rem;
+      }
+      .lede {
+        color: var(--muted);
+        margin: 0 0 1.5rem;
+        font-size: 0.95rem;
+      }
+      section {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 1.25rem 1.35rem;
+        margin-bottom: 1rem;
+      }
+      h2 {
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--muted);
+        margin: 0 0 0.75rem;
+        font-weight: 600;
+      }
+      textarea {
+        width: 100%;
+        min-height: 140px;
+        font-family: ui-monospace, monospace;
+        font-size: 0.75rem;
+        padding: 0.75rem;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        resize: vertical;
+      }
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.75rem;
+      }
+      button {
+        font: inherit;
+        cursor: pointer;
+        border-radius: 8px;
+        padding: 0.55rem 1rem;
+        border: 1px solid var(--border);
+        background: var(--card);
+      }
+      button.primary {
+        background: var(--text);
+        color: var(--card);
+        border-color: var(--text);
+      }
+      button.primary:hover {
+        opacity: 0.92;
+      }
+      #status {
+        margin-top: 1rem;
+        padding: 0.65rem 0.85rem;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        border: 1px solid var(--border);
+        background: var(--card);
+      }
+      #status[data-kind="ok"] {
+        border-color: #9bc99b;
+        background: #f0faf0;
+      }
+      #status[data-kind="err"] {
+        border-color: #e0a0a0;
+        background: #fff5f5;
+      }
+      #validation {
+        margin-top: 0.5rem;
+        font-size: 0.8rem;
+        font-family: ui-monospace, monospace;
+      }
+      #validation[data-kind="ok"] {
+        color: #1d6b1d;
+      }
+      #validation[data-kind="err"] {
+        color: #a03030;
+      }
+      ol.steps {
+        margin: 0;
+        padding-left: 1.2rem;
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+      ol.steps li {
+        margin-bottom: 0.35rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Test — presse-papiers Webflow (Xscp)</h1>
+    <p class="lede">
+      Vérifie que <code>webflow-clipboard</code> écrit bien
+      <code>application/json</code> + <code>text/plain</code> pour un collage
+      dans le Designer. Le flux fiable est : copier dans Webflow → coller ici →
+      recopier → coller dans Webflow.
+    </p>
+
+    <section>
+      <h2>Étape A — Coller depuis le Designer</h2>
+      <ol class="steps">
+        <li>Ouvrez un site dans le Webflow Designer.</li>
+        <li>Sélectionnez un élément (ex. une <code>div</code>) et Ctrl/Cmd+C.</li>
+        <li>Cliquez dans la zone ci-dessous et Ctrl/Cmd+V (le JSON doit apparaître).</li>
+      </ol>
+      <textarea
+        id="paste-area"
+        placeholder="Cliquez ici puis Cmd+V / Ctrl+V après une copie dans le Designer…"
+        spellcheck="false"
+      ></textarea>
+      <div id="validation"></div>
+      <div class="row">
+        <button type="button" class="primary" id="btn-copy-from-field">
+          Copier pour le Designer (Xscp)
+        </button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Étape B — Échantillon minimal (exploratoire)</h2>
+      <p class="lede" style="margin-bottom: 0.75rem">
+        JSON factice pour tester le mécanisme de copie. Le Designer peut refuser
+        le collage si le payload ne correspond pas à un export réel.
+      </p>
+      <div class="row">
+        <button type="button" id="btn-copy-sample">
+          Copier l’échantillon minimal
+        </button>
+      </div>
+    </section>
+
+    <div id="status" data-kind="info"></div>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

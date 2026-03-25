@@ -1,0 +1,110 @@
+@import url("https://fonts.googleapis.com/css2?family=Basis+Grotesque+Pro:wght@400;700&display=swap");
+
+[data-component="sageeast-3d-scroll"] {
+  --sg-accent: rgb(230, 170, 40);
+  --sg-bg: #000;
+  width: 100%;
+}
+
+[data-component="sageeast-3d-scroll"] * {
+  box-sizing: border-box;
+}
+
+[data-component="sageeast-3d-scroll"] img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+[data-component="sageeast-3d-scroll"] a,
+[data-component="sageeast-3d-scroll"] p {
+  color: var(--sg-accent);
+  text-decoration: none;
+  font-family: "Basis Grotesque Pro", sans-serif;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin: 0;
+}
+
+[data-component="sageeast-3d-scroll"] [data-sg-container] {
+  width: 100%;
+  position: relative;
+}
+
+[data-component="sageeast-3d-scroll"] [data-sg-active] {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--sg-bg);
+  opacity: 0.35;
+  z-index: -1;
+  pointer-events: none;
+}
+
+[data-component="sageeast-3d-scroll"] [data-sg-active] img {
+  position: absolute;
+  inset: 0;
+  filter: blur(50px);
+  transform: scale(1.125);
+  opacity: 0;
+}
+
+[data-component="sageeast-3d-scroll"] [data-sg-slider] {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  transform-style: preserve-3d;
+  perspective: 750px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+[data-component="sageeast-3d-scroll"] .sg-slide {
+  position: absolute;
+  top: 50%;
+  width: 400px;
+  height: 500px;
+  overflow: hidden;
+  will-change: transform, opacity;
+}
+
+[data-component="sageeast-3d-scroll"] .sg-slide-copy {
+  text-align: center;
+  padding: 1rem;
+}
+
+[data-component="sageeast-3d-scroll"] .sg-slide-copy p {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--sg-accent);
+}
+
+[data-component="sageeast-3d-scroll"] .sg-slide-index {
+  font-size: 11px !important;
+  font-weight: 400 !important;
+  margin-top: 0.5em !important;
+}
+
+[data-component="sageeast-3d-scroll"] .sg-slide-img {
+  width: 100%;
+  height: calc(100% - 80px);
+}
+
+[data-component="sageeast-3d-scroll"] .sg-slide-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  [data-component="sageeast-3d-scroll"] .sg-slide {
+    width: 280px;
+    height: 360px;
+  }
+}

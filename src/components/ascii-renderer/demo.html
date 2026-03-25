@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ASCII Renderer | Demo</title>
+    <link rel="stylesheet" href="./ascii-renderer.css" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        min-height: 100%;
+        background: #000;
+      }
+      [data-component="ascii-renderer"] {
+        width: 100%;
+        height: 100svh;
+      }
+      .ar-console {
+        position: fixed;
+        bottom: 1rem;
+        left: 1rem;
+        right: 1rem;
+        max-width: 420px;
+        padding: 1rem 1.25rem;
+        background: rgba(0, 0, 0, 0.85);
+        border: 1px solid rgba(15, 255, 0, 0.3);
+        border-radius: 8px;
+        font-family: "JetBrains Mono", "Fira Code", "Courier New", monospace;
+        font-size: 0.75rem;
+        color: #0f0;
+        z-index: 10;
+      }
+      .ar-console h3 {
+        margin: 0 0 0.75rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+      .ar-console label {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        margin-bottom: 0.5rem;
+      }
+      .ar-console input[type="range"] {
+        width: 120px;
+        accent-color: #0f0;
+      }
+      .ar-console input[type="color"] {
+        width: 36px;
+        height: 24px;
+        padding: 2px;
+        border: 1px solid rgba(15, 255, 0, 0.4);
+        border-radius: 4px;
+        background: #000;
+        cursor: pointer;
+      }
+      .ar-console input[type="checkbox"] {
+        accent-color: #0f0;
+        cursor: pointer;
+      }
+      .ar-console select {
+        padding: 0.25rem 0.5rem;
+        background: #000;
+        border: 1px solid rgba(15, 255, 0, 0.4);
+        border-radius: 4px;
+        color: #0f0;
+        font-family: inherit;
+        font-size: 0.7rem;
+        cursor: pointer;
+      }
+      .ar-console .value {
+        min-width: 2rem;
+        text-align: right;
+        opacity: 0.8;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      data-component="ascii-renderer"
+      data-ar-cell-size="6"
+      data-ar-color="#0f0"
+      data-ar-scanlines="true"
+      data-ar-hover-size="35"
+    >
+      <div data-ar-container>
+        <img
+          data-ar-image
+          src="./public/daisy.png"
+          alt="Marguerite"
+        />
+      </div>
+    </div>
+
+    <aside class="ar-console" aria-label="Contrôles du rendu ASCII">
+      <h3>Console</h3>
+      <label>
+        <span>Cell size</span>
+        <input type="range" id="ar-cell-size" min="3" max="20" value="6" />
+        <span class="value" id="ar-cell-size-value">6</span>
+      </label>
+      <label>
+        <span>Couleur</span>
+        <input type="color" id="ar-color" value="#00ff00" />
+        <span class="value" id="ar-color-value">#0f0</span>
+      </label>
+      <label>
+        <span>Scanlines</span>
+        <input type="checkbox" id="ar-scanlines" checked />
+      </label>
+      <label>
+        <span>Hover size</span>
+        <input type="range" id="ar-hover-size" min="0" max="80" value="35" />
+        <span class="value" id="ar-hover-size-value">35%</span>
+      </label>
+      <label>
+        <span>Palette</span>
+        <select id="ar-chars">
+          <option value="default">Classique</option>
+          <option value="blocks">Blocs</option>
+          <option value="minimal">Minimal</option>
+          <option value="dense">Dense</option>
+        </select>
+      </label>
+    </aside>
+
+    <script type="module" src="./ascii-renderer.js"></script>
+    <script type="module">
+      import { initAsciiRenderer } from "./ascii-renderer.js";
+
+      const CHAR_PRESETS = {
+        default: "",
+        blocks: " ░▒▓█",
+        minimal: " .:",
+        dense: " .:-=+*#%@",
+      };
+
+      const root = document.querySelector('[data-component="ascii-renderer"]');
+      const cellSizeInput = document.getElementById("ar-cell-size");
+      const cellSizeValue = document.getElementById("ar-cell-size-value");
+      const colorInput = document.getElementById("ar-color");
+      const colorValue = document.getElementById("ar-color-value");
+      const scanlinesInput = document.getElementById("ar-scanlines");
+      const hoverSizeInput = document.getElementById("ar-hover-size");
+      const hoverSizeValue = document.getElementById("ar-hover-size-value");
+      const charsSelect = document.getElementById("ar-chars");
+
+      function apply() {
+        root.setAttribute("data-ar-cell-size", cellSizeInput.value);
+        root.setAttribute("data-ar-color", colorInput.value);
+        root.setAttribute("data-ar-scanlines", scanlinesInput.checked ? "true" : "false");
+        root.setAttribute("data-ar-hover-size", hoverSizeInput.value);
+        const chars = CHAR_PRESETS[charsSelect.value];
+        if (chars) root.setAttribute("data-ar-chars", chars);
+        else root.removeAttribute("data-ar-chars");
+        cellSizeValue.textContent = cellSizeInput.value;
+        colorValue.textContent = colorInput.value;
+        hoverSizeValue.textContent = hoverSizeInput.value + "%";
+        initAsciiRenderer(root);
+      }
+
+      cellSizeInput.addEventListener("input", apply);
+      colorInput.addEventListener("input", apply);
+      scanlinesInput.addEventListener("change", apply);
+      hoverSizeInput.addEventListener("input", apply);
+      charsSelect.addEventListener("change", apply);
+
+      apply();
+    </script>
+  </body>
+</html>

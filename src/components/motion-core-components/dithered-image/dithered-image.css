@@ -1,0 +1,17 @@
+[data-component="dithered-image"] [data-di-container] {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+[data-component="dithered-image"] [data-di-image] {
+  display: none;
+}
+
+[data-component="dithered-image"] [data-di-container] canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

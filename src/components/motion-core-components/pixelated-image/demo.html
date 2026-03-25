@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pixelated Image | Motion Core</title>
+    <link rel="stylesheet" href="./pixelated-image.css" />
+    <style>
+      html, body { margin: 0; background: #111; color: #fff; }
+      [data-component="pixelated-image"] { width: 100%; height: 100svh; }
+      .mc-console { position: fixed; bottom: 1rem; left: 1rem; max-width: 320px; padding: 1rem; background: rgba(0,0,0,0.85); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; font-family: monospace; font-size: 0.75rem; z-index: 10; }
+      .mc-console h3 { margin: 0 0 0.75rem; font-size: 0.8rem; }
+      .mc-console label { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.5rem; }
+      .mc-console input[type="range"] { width: 120px; accent-color: #fff; }
+      .mc-console .value { min-width: 2rem; text-align: right; opacity: 0.8; }
+    </style>
+  </head>
+  <body>
+    <div data-component="pixelated-image" data-pi-size="12">
+      <div data-pi-container>
+        <img data-pi-image src="../ascii-renderer/public/daisy.png" alt="" />
+      </div>
+    </div>
+    <aside class="mc-console" aria-label="Contrôles">
+      <h3>Console</h3>
+      <label><span>Pixel size</span><input type="range" id="pi-size" min="2" max="32" value="12" /><span class="value" id="pi-size-value">12</span></label>
+    </aside>
+    <script type="module" src="./pixelated-image.js"></script>
+    <script type="module">
+      import { initPixelatedImage } from "./pixelated-image.js";
+      const root = document.querySelector('[data-component="pixelated-image"]');
+      const sizeInput = document.getElementById("pi-size");
+      const sizeValue = document.getElementById("pi-size-value");
+      function apply() { root.setAttribute("data-pi-size", sizeInput.value); sizeValue.textContent = sizeInput.value; initPixelatedImage(root); }
+      sizeInput.addEventListener("input", apply);
+      apply();
+    </script>
+  </body>
+</html>

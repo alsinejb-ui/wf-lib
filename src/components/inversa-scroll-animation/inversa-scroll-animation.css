@@ -1,0 +1,276 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@100..1000&display=swap");
+
+[data-component="inversa-scroll-animation"] {
+  --inversa-light: #fff;
+  --inversa-dark: #141414;
+  --inversa-accent-1: #dc5935;
+  --inversa-accent-2: #d3ef76;
+  font-family: "DM Sans", sans-serif;
+  background-color: var(--inversa-dark);
+  color: var(--inversa-light);
+}
+
+[data-component="inversa-scroll-animation"] * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+[data-component="inversa-scroll-animation"] img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+[data-component="inversa-scroll-animation"] h1,
+[data-component="inversa-scroll-animation"] h2 {
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+[data-component="inversa-scroll-animation"] h1 {
+  font-size: clamp(3rem, 4vw, 5rem);
+}
+
+[data-component="inversa-scroll-animation"] h2 {
+  font-size: clamp(1.5rem, 2.25vw, 3rem);
+}
+
+[data-component="inversa-scroll-animation"] p {
+  font-size: 1.125rem;
+  line-height: 1.4;
+}
+
+[data-component="inversa-scroll-animation"] [data-inversa-hero],
+[data-component="inversa-scroll-animation"] [data-inversa-outro] {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  overflow: hidden;
+  background-color: var(--inversa-dark);
+}
+
+[data-component="inversa-scroll-animation"] [data-inversa-outro] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+[data-component="inversa-scroll-animation"] [data-inversa-img] {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 200svh;
+  --inversa-overlay-opacity: 0.35;
+  will-change: transform;
+}
+
+[data-component="inversa-scroll-animation"] [data-inversa-img]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--inversa-dark);
+  opacity: var(--inversa-overlay-opacity);
+  will-change: opacity;
+}
+
+[data-component="inversa-scroll-animation"] [data-inversa-img] img {
+  will-change: filter;
+}
+
+[data-component="inversa-scroll-animation"] [data-inversa-mask] {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100svh;
+  background-color: var(--inversa-dark);
+  mask: linear-gradient(var(--inversa-light), var(--inversa-light)),
+    url("./public/mask.svg") center/50% no-repeat;
+  -webkit-mask: linear-gradient(var(--inversa-light), var(--inversa-light)),
+    url("./public/mask.svg") center/50% no-repeat;
+  mask-composite: subtract;
+  -webkit-mask-composite: subtract;
+  will-change: transform;
+  pointer-events: none;
+}
+
+[data-component="inversa-scroll-animation"] [data-inversa-grid] {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 55%;
+  will-change: opacity;
+}
+
+[data-component="inversa-scroll-animation"] [data-inversa-grid] img {
+  opacity: 0.25;
+}
+
+[data-component="inversa-scroll-animation"] [data-inversa-marker] {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  will-change: opacity;
+}
+
+[data-component="inversa-scroll-animation"] [data-inversa-marker="1"] {
+  top: 50svh;
+  left: 50vw;
+}
+
+[data-component="inversa-scroll-animation"] [data-inversa-marker="2"] {
+  top: 35svh;
+  left: 60vw;
+}
+
+[data-component="inversa-scroll-animation"] .inversa-marker-label {
+  text-transform: uppercase;
+  font-family: "DM Mono", monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+[data-component="inversa-scroll-animation"] .inversa-marker-icon {
+  position: relative;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 2rem;
+}
+
+[data-component="inversa-scroll-animation"] .inversa-marker-icon::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10rem;
+  height: 10rem;
+  border-radius: 100%;
+  animation: inversa-pulse 1.5s cubic-bezier(0.2, 0.6, 0.35, 1) infinite;
+}
+
+[data-component="inversa-scroll-animation"] [data-inversa-marker="1"] .inversa-marker-icon,
+[data-component="inversa-scroll-animation"] [data-inversa-marker="1"] .inversa-marker-icon::before,
+[data-component="inversa-scroll-animation"] [data-inversa-marker="1"] .inversa-marker-label {
+  background-color: var(--inversa-accent-1);
+  color: var(--inversa-light);
+}
+
+[data-component="inversa-scroll-animation"] [data-inversa-marker="2"] .inversa-marker-icon,
+[data-component="inversa-scroll-animation"] [data-inversa-marker="2"] .inversa-marker-icon::before,
+[data-component="inversa-scroll-animation"] [data-inversa-marker="2"] .inversa-marker-label {
+  background-color: var(--inversa-accent-2);
+  color: var(--inversa-dark);
+}
+
+@keyframes inversa-pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.25);
+  }
+  80%,
+  100% {
+    opacity: 0;
+  }
+}
+
+[data-component="inversa-scroll-animation"] [data-inversa-content] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 400svh;
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+}
+
+[data-component="inversa-scroll-animation"] .inversa-content-block {
+  width: 100%;
+  height: 100svh;
+  padding: 4rem;
+  display: flex;
+}
+
+[data-component="inversa-scroll-animation"] .inversa-content-copy {
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+[data-component="inversa-scroll-animation"] .inversa-content-block:nth-child(1) {
+  align-items: flex-end;
+}
+
+[data-component="inversa-scroll-animation"] .inversa-content-block:nth-child(2),
+[data-component="inversa-scroll-animation"] .inversa-content-block:nth-child(4) {
+  justify-content: flex-end;
+  align-items: center;
+}
+
+[data-component="inversa-scroll-animation"] .inversa-content-block:nth-child(3) {
+  align-items: center;
+}
+
+[data-component="inversa-scroll-animation"] [data-inversa-progress] {
+  position: absolute;
+  top: 50%;
+  right: 2rem;
+  transform: translateY(-50%);
+  width: 0.1rem;
+  height: 10rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  --inversa-progress: 0;
+}
+
+[data-component="inversa-scroll-animation"] [data-inversa-progress]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--inversa-light);
+  transform-origin: top;
+  transform: scaleY(var(--inversa-progress));
+  will-change: transform;
+}
+
+@media (max-width: 800px) {
+  [data-component="inversa-scroll-animation"] [data-inversa-mask] {
+    mask: linear-gradient(var(--inversa-light), var(--inversa-light)),
+      url("./public/mask.svg") center/75% no-repeat;
+    -webkit-mask: linear-gradient(var(--inversa-light), var(--inversa-light)),
+      url("./public/mask.svg") center/75% no-repeat;
+    mask-composite: subtract;
+    -webkit-mask-composite: subtract;
+  }
+
+  [data-component="inversa-scroll-animation"] [data-inversa-grid] {
+    width: 100%;
+  }
+
+  [data-component="inversa-scroll-animation"] [data-inversa-marker="1"] {
+    top: 52.5svh;
+    left: 50vw;
+  }
+
+  [data-component="inversa-scroll-animation"] [data-inversa-marker="2"] {
+    top: 45svh;
+    left: 70vw;
+  }
+
+  [data-component="inversa-scroll-animation"] .inversa-content-block {
+    padding: 1.5rem;
+  }
+
+  [data-component="inversa-scroll-animation"] .inversa-content-copy {
+    width: 75%;
+  }
+
+  [data-component="inversa-scroll-animation"] [data-inversa-progress] {
+    right: 1rem;
+  }
+}

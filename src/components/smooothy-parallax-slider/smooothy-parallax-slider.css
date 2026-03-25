@@ -1,0 +1,60 @@
+[data-component="smooothy-parallax-slider"] {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  user-select: none;
+}
+
+[data-component="smooothy-parallax-slider"] [data-sps-track] {
+  display: flex;
+  flex-shrink: 0;
+  width: max-content;
+}
+
+[data-component="smooothy-parallax-slider"] [data-sps-track] > * {
+  flex-shrink: 0;
+}
+
+[data-component="smooothy-parallax-slider"] .sps-slide {
+  width: 80vw;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  margin-right: 1rem;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  [data-component="smooothy-parallax-slider"] .sps-slide {
+    width: 30vw;
+  }
+}
+
+[data-component="smooothy-parallax-slider"] .sps-slide-inner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+}
+
+[data-component="smooothy-parallax-slider"] .sps-parallax {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+[data-component="smooothy-parallax-slider"] .sps-parallax {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+}
+
+[data-component="smooothy-parallax-slider"] .sps-parallax img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.4);
+  will-change: transform;
+}

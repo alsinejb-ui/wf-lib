@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>svg-image-hover — Documentation wf-lib</title>
+    <style>
+      :root {
+        --bg: #f1f0ec;
+        --surface: #fff;
+        --border: #e0ded8;
+        --text: #161513;
+        --muted: #5e5c57;
+        --accent: #146ef5;
+        --radius: 10px;
+        --font: system-ui, -apple-system, sans-serif;
+        --mono: ui-monospace, "Cascadia Code", monospace;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: var(--font);
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.55;
+        display: grid;
+        grid-template-columns: minmax(200px, 240px) minmax(0, 1fr) minmax(
+            180px,
+            220px
+          );
+        min-height: 100vh;
+      }
+      @media (max-width: 960px) {
+        body {
+          grid-template-columns: 1fr;
+        }
+        .rail-right {
+          display: none;
+        }
+      }
+      .rail-left {
+        padding: 1.5rem 1.25rem;
+        border-right: 1px solid var(--border);
+        background: var(--surface);
+        position: sticky;
+        top: 0;
+        align-self: start;
+        max-height: 100vh;
+        overflow: auto;
+      }
+      .rail-left a {
+        color: var(--text);
+        text-decoration: none;
+      }
+      .rail-left a:hover {
+        text-decoration: underline;
+      }
+      .logo {
+        font-weight: 800;
+        font-size: 0.85rem;
+        letter-spacing: 0.06em;
+        margin-bottom: 1.25rem;
+      }
+      .nav-links {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+      }
+      main {
+        padding: clamp(1.25rem, 3vw, 2.5rem);
+        max-width: 48rem;
+      }
+      .rail-right {
+        padding: 1.5rem 1.25rem;
+        border-left: 1px solid var(--border);
+        background: var(--surface);
+        position: sticky;
+        top: 0;
+        align-self: start;
+        font-size: 0.85rem;
+      }
+      .rail-right h3 {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--muted);
+        margin: 0 0 0.75rem;
+      }
+      .meta-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .meta-list li {
+        margin-bottom: 0.65rem;
+        color: var(--muted);
+      }
+      .meta-list strong {
+        display: block;
+        color: var(--text);
+        font-size: 0.8rem;
+        margin-bottom: 0.15rem;
+      }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem;
+        margin-top: 0.75rem;
+      }
+      .tag {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.45rem;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        background: var(--bg);
+      }
+      h1 {
+        font-size: clamp(1.75rem, 4vw, 2.35rem);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin: 0 0 0.5rem;
+        line-height: 1.15;
+      }
+      .lede {
+        color: var(--muted);
+        margin: 0 0 1.75rem;
+        max-width: 40rem;
+      }
+      .hero {
+        border: 1px solid var(--border);
+        border-radius: calc(var(--radius) + 4px);
+        overflow: hidden;
+        background: #0d0d0c;
+        margin-bottom: 1.75rem;
+      }
+      .hero iframe {
+        display: block;
+        width: 100%;
+        height: min(420px, 56vw);
+        border: 0;
+        background: var(--surface);
+      }
+      .tabs {
+        display: flex;
+        gap: 0.35rem;
+        margin-bottom: 1.25rem;
+      }
+      .tabs button {
+        font: inherit;
+        cursor: pointer;
+        padding: 0.45rem 0.9rem;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        color: var(--muted);
+      }
+      .tabs button[aria-pressed="true"] {
+        background: var(--text);
+        color: var(--surface);
+        border-color: var(--text);
+      }
+      section.block {
+        margin-bottom: 1.75rem;
+      }
+      section.block h2 {
+        font-size: 1.05rem;
+        font-weight: 600;
+        margin: 0 0 0.65rem;
+      }
+      .code-block {
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+        background: var(--surface);
+        margin-bottom: 1rem;
+      }
+      .code-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.45rem 0.75rem;
+        background: #f7f6f3;
+        border-bottom: 1px solid var(--border);
+        font-size: 0.75rem;
+        color: var(--muted);
+      }
+      .code-head button {
+        font: inherit;
+        font-size: 0.72rem;
+        padding: 0.3rem 0.65rem;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        cursor: pointer;
+      }
+      .code-head button:hover {
+        border-color: var(--text);
+      }
+      pre {
+        margin: 0;
+        padding: 0.85rem 1rem;
+        overflow: auto;
+        max-height: 320px;
+      }
+      code {
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        line-height: 1.45;
+        white-space: pre;
+      }
+      .webflow-box {
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1rem 1.15rem;
+        background: var(--surface);
+        margin-bottom: 1rem;
+      }
+      .webflow-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.75rem;
+        margin-bottom: 0.75rem;
+      }
+      .btn-primary {
+        font: inherit;
+        cursor: pointer;
+        padding: 0.65rem 1.1rem;
+        border-radius: 8px;
+        border: 1px solid var(--text);
+        background: var(--text);
+        color: var(--surface);
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+      .btn-primary:hover {
+        opacity: 0.92;
+      }
+      .btn-primary:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+      }
+      .btn-ghost {
+        font: inherit;
+        cursor: pointer;
+        padding: 0.5rem 0.85rem;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        font-size: 0.8rem;
+      }
+      #xscp-paste {
+        width: 100%;
+        min-height: 100px;
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        padding: 0.65rem;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        resize: vertical;
+      }
+      #status-webflow {
+        font-size: 0.85rem;
+        padding: 0.6rem 0.75rem;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        margin-top: 0.65rem;
+      }
+      #status-webflow[data-kind="ok"] {
+        background: #f0faf0;
+        border-color: #9bc99b;
+      }
+      #status-webflow[data-kind="err"] {
+        background: #fff5f5;
+        border-color: #e0a0a0;
+      }
+      .hint {
+        font-size: 0.82rem;
+        color: var(--muted);
+        margin: 0.5rem 0 0;
+      }
+      .steps-ol {
+        margin: 0.5rem 0 0;
+        padding-left: 1.2rem;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+      .steps-ol li {
+        margin-bottom: 0.35rem;
+      }
+    </style>
+  </head>
+  <body>
+    <aside class="rail-left">
+      <div class="logo">WF-LIB</div>
+      <nav class="nav-links">
+        <a href="./demo.html">Démo plein écran (6 cartes)</a>
+        <a href="./demo2.html">Aperçu doc (1 carte)</a>
+        <a href="../../../COMPONENTS.md">COMPONENTS.md (source)</a>
+        <a href="../../docs/webflow-copy-test/index.html">Test presse-papiers</a>
+      </nav>
+    </aside>
+
+    <main>
+      <h1>svg-image-hover</h1>
+      <p class="lede">
+        Effet de survol sur des cartes : animation SVG
+        <code>stroke-dashoffset</code> et apparition des mots du titre (GSAP).
+        Dans Webflow : <strong>CSS et JS via Custom Code</strong> (liens wf-lib),
+        puis <strong>structure 100 % native</strong> (collage Xscp ou création
+        dans le Designer) — <strong>pas d’Embed HTML</strong> pour porter la
+        structure.
+      </p>
+
+      <div class="hero">
+        <iframe
+          src="./demo2.html"
+          title="Aperçu svg-image-hover (1 carte)"
+          loading="lazy"
+        ></iframe>
+      </div>
+
+      <div class="tabs">
+        <button type="button" data-tab="webflow" aria-pressed="true">
+          Webflow
+        </button>
+        <button type="button" data-tab="code" aria-pressed="false">Code</button>
+      </div>
+
+      <div data-panel="webflow">
+        <section class="block">
+          <h2>Étape 1 — CSS &amp; JS (Custom Code du site)</h2>
+          <p class="hint" style="margin-top: 0">
+            Les styles du composant viennent de <strong>wf-lib.css</strong> (pas
+            d’Embed pour du CSS). Ajoutez le lien dans le
+            <code>&lt;head&gt;</code> et le module JS avant
+            <code>&lt;/body&gt;</code> — le script initialise automatiquement les
+            <code>[data-component]</code>.
+          </p>
+          <div class="code-block">
+            <div class="code-head">
+              <span>HTML — &lt;head&gt;</span>
+              <button type="button" data-copy-target="snippet-head-global">
+                Copier
+              </button>
+            </div>
+            <pre><code id="snippet-head-global"></code></pre>
+          </div>
+          <div class="code-block">
+            <div class="code-head">
+              <span>HTML — avant &lt;/body&gt;</span>
+              <button type="button" data-copy-target="snippet-body-global">
+                Copier
+              </button>
+            </div>
+            <pre><code id="snippet-body-global"></code></pre>
+          </div>
+        </section>
+
+        <section class="block">
+          <h2>Étape 2 — Structure native dans le Designer</h2>
+          <p class="hint" style="margin-top: 0">
+            Collez une structure déjà construite (divs, classes
+            <code>card-img</code>, <code>svg-stroke</code>, SVG inline dans des
+            blocs natifs, attributs <code>data-*</code>) via le JSON Webflow
+            ci-dessous, ou recréez la hiérarchie à la main en vous calant sur
+            l’onglet <strong>Code</strong> (référence HTML uniquement).
+          </p>
+          <div class="webflow-box">
+            <p class="hint" style="margin-top: 0">
+              Placez <code>webflow-structure.xscp.json</code> dans ce dossier
+              (export depuis le Designer), ou collez le JSON après une copie
+              dans le Designer.
+            </p>
+            <textarea
+              id="xscp-paste"
+              placeholder="Cmd+V après copie dans le Webflow Designer…"
+              spellcheck="false"
+            ></textarea>
+            <div class="webflow-actions">
+              <button
+                type="button"
+                class="btn-primary"
+                id="btn-copy-webflow"
+                disabled
+              >
+                Copier pour le Designer
+              </button>
+              <button type="button" class="btn-ghost" id="btn-reload-xscp">
+                Recharger le fichier .xscp
+              </button>
+            </div>
+            <div id="status-webflow" data-kind="info"></div>
+            <p class="hint">
+              Le collage <strong>Cmd+V / Ctrl+V</strong> sur le canvas recrée
+              les éléments natifs et leurs classes — le CSS wf-lib (étape 1)
+              s’applique alors comme sur la démo.
+            </p>
+          </div>
+        </section>
+
+        <section class="block">
+          <h2>Étape 3 — Composant seul (après build)</h2>
+          <div class="code-block">
+            <div class="code-head">
+              <span>HTML — &lt;head&gt;</span>
+              <button type="button" data-copy-target="snippet-head-individual">
+                Copier
+              </button>
+            </div>
+            <pre><code id="snippet-head-individual"></code></pre>
+          </div>
+          <div class="code-block">
+            <div class="code-head">
+              <span>HTML — avant &lt;/body&gt;</span>
+              <button type="button" data-copy-target="snippet-body-individual">
+                Copier
+              </button>
+            </div>
+            <pre><code id="snippet-body-individual"></code></pre>
+          </div>
+        </section>
+
+        <section class="block">
+          <h2>Étape 4 — Variable CSS (optionnel)</h2>
+          <p class="hint" style="margin-top: 0">
+            À coller dans <strong>Custom Code &gt; Head</strong> (balise
+            <code>&lt;style&gt;</code>) ou dans votre feuille de styles si vous
+            en ajoutez une — en complément de wf-lib.css, pas à la place.
+          </p>
+          <div class="code-block">
+            <div class="code-head">
+              <span>CSS — variable</span>
+              <button type="button" data-copy-target="snippet-css-var">
+                Copier
+              </button>
+            </div>
+            <pre><code id="snippet-css-var"></code></pre>
+          </div>
+        </section>
+
+        <section class="block">
+          <h2>Designer — rappel (sans Embed)</h2>
+          <ol class="steps-ol">
+            <li>
+              Section ou div racine : attribut
+              <code>data-component</code> =
+              <code>svg-image-hover</code>
+            </li>
+            <li>
+              Chaque carte : <code>data-svg-hover-card</code> (vide),
+              <code>tabindex="0"</code>
+            </li>
+            <li>
+              Titre : <code>data-svg-hover-title</code> sur le heading
+            </li>
+            <li>
+              SVG : blocs avec classes <code>svg-stroke</code> /
+              <code>svg-stroke-1</code> / <code>svg-stroke-2</code> et
+              <code>&lt;path&gt;</code> dans le DOM (comme dans un export Xscp) —
+              une simple balise Image vers un fichier .svg ne suffit pas au
+              script pour animer les traits.
+            </li>
+          </ol>
+        </section>
+      </div>
+
+      <div data-panel="code" hidden>
+        <section class="block">
+          <h2>Hors Webflow (ES module)</h2>
+          <div class="code-block">
+            <div class="code-head">
+              <span>JavaScript</span>
+              <button type="button" data-copy-target="snippet-js-standalone">
+                Copier
+              </button>
+            </div>
+            <pre><code id="snippet-js-standalone"></code></pre>
+          </div>
+          <p class="hint">
+            Démo locale :
+            <code>npm run dev</code> →
+            <a href="./demo.html">demo.html</a>
+          </p>
+        </section>
+        <section class="block">
+          <h2>Référence HTML (hors Webflow / debug)</h2>
+          <p class="hint" style="margin-top: 0">
+            Équivalent d’une carte de la démo — pour lecture ou tests locaux, pas
+            comme workflow Webflow (structure native + CSS wf-lib à la place).
+          </p>
+          <div class="code-block">
+            <div class="code-head">
+              <span>HTML</span>
+              <button type="button" data-copy-target="snippet-html">
+                Copier
+              </button>
+            </div>
+            <pre><code id="snippet-html"></code></pre>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <aside class="rail-right">
+      <h3>Détails</h3>
+      <ul class="meta-list">
+        <li>
+          <strong>Dossier</strong>
+          src/components/svg-image-hover
+        </li>
+        <li>
+          <strong>Dépendance</strong>
+          GSAP (incluse dans le bundle wf-lib)
+        </li>
+        <li>
+          <strong>Doc source</strong>
+          COMPONENTS.md § svg-image-hover
+        </li>
+      </ul>
+      <div class="tags">
+        <span class="tag">Hover</span>
+        <span class="tag">SVG</span>
+        <span class="tag">Webflow</span>
+        <span class="tag">GSAP</span>
+      </div>
+    </aside>
+
+    <script type="module" src="./doc.js"></script>
+  </body>
+</html>

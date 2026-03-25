@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marquee | Motion Core</title>
+    <link rel="stylesheet" href="./marquee.css" />
+    <style>
+      html, body { margin: 0; background: #111; color: #fff; }
+      .marquee-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; min-height: 24rem; padding: 2rem 0; }
+      [data-component="marquee"] { width: 100%; }
+      [data-mq-item] { font-size: 2.5rem; font-weight: 500; padding: 0 0.5rem; }
+      .mc-console { position: fixed; bottom: 1rem; left: 1rem; max-width: 320px; padding: 1rem; background: rgba(0,0,0,0.85); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; font-family: monospace; font-size: 0.75rem; z-index: 10; }
+      .mc-console h3 { margin: 0 0 0.75rem; font-size: 0.8rem; }
+      .mc-console label { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.5rem; }
+      .mc-console input[type="range"] { width: 120px; accent-color: #fff; }
+      .mc-console select { padding: 0.25rem; background: #222; border: 1px solid rgba(255,255,255,0.3); border-radius: 4px; color: #fff; cursor: pointer; }
+      .mc-console .value { min-width: 3rem; text-align: right; opacity: 0.8; }
+    </style>
+  </head>
+  <body>
+    <div class="marquee-wrap">
+      <div data-component="marquee" data-mq-duration="20" data-mq-velocity="1" data-mq-gap="0" data-mq-reversed="false">
+        <div data-mq-track>
+          <span data-mq-item>Motion・</span>
+          <span data-mq-item>Craft・</span>
+          <span data-mq-item>Ecosystem・</span>
+          <span data-mq-item>Initiative・</span>
+          <span data-mq-item>Transition・</span>
+          <span data-mq-item>Interaction・</span>
+          <span data-mq-item>Experience・</span>
+          <span data-mq-item>Playground・</span>
+          <span data-mq-item>Journey・</span>
+        </div>
+      </div>
+
+      <div data-component="marquee" data-mq-duration="20" data-mq-velocity="1" data-mq-gap="0" data-mq-reversed="true">
+        <div data-mq-track>
+          <span data-mq-item>Motion・</span>
+          <span data-mq-item>Craft・</span>
+          <span data-mq-item>Ecosystem・</span>
+          <span data-mq-item>Initiative・</span>
+          <span data-mq-item>Transition・</span>
+          <span data-mq-item>Interaction・</span>
+          <span data-mq-item>Experience・</span>
+          <span data-mq-item>Playground・</span>
+          <span data-mq-item>Journey・</span>
+        </div>
+      </div>
+    </div>
+
+    <aside class="mc-console" aria-label="Contrôles">
+      <h3>Console</h3>
+      <label><span>Duration</span><input type="range" id="mq-duration" min="5" max="60" value="20" /><span class="value" id="mq-duration-value">20s</span></label>
+      <label><span>Velocity</span><input type="range" id="mq-velocity" min="25" max="200" value="100" /><span class="value" id="mq-velocity-value">1</span></label>
+      <label><span>Direction</span><select id="mq-direction"><option value="normal">Normal / Reversed</option><option value="both-normal">Both normal</option><option value="both-reversed">Both reversed</option></select></label>
+    </aside>
+
+    <script type="module" src="./marquee.js"></script>
+    <script type="module">
+      import { initMarquee } from "./marquee.js";
+      const roots = document.querySelectorAll('[data-component="marquee"]');
+      const durationInput = document.getElementById("mq-duration");
+      const velocityInput = document.getElementById("mq-velocity");
+      const directionSelect = document.getElementById("mq-direction");
+
+      function apply() {
+        const velocity = (velocityInput.value / 100).toFixed(2);
+        const dir = directionSelect.value;
+        roots.forEach((root, i) => {
+          root.setAttribute("data-mq-duration", durationInput.value);
+          root.setAttribute("data-mq-velocity", velocity);
+          root.setAttribute("data-mq-reversed", dir === "normal" ? (i === 1 ? "true" : "false") : dir === "both-reversed" ? "true" : "false");
+        });
+        document.getElementById("mq-duration-value").textContent = durationInput.value + "s";
+        document.getElementById("mq-velocity-value").textContent = velocity;
+        roots.forEach(initMarquee);
+      }
+
+      durationInput.addEventListener("input", apply);
+      velocityInput.addEventListener("input", apply);
+      directionSelect.addEventListener("change", apply);
+      apply();
+    </script>
+  </body>
+</html>

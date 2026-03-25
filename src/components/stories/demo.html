@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <title>Stories | Demo</title>
+    <link rel="stylesheet" href="./stories.css" />
+    <style>
+      * { margin: 0; padding: 0; }
+      html, body { width: 100%; min-height: 100%; background: #000; }
+    </style>
+  </head>
+  <body>
+    <div
+      data-component="stories"
+      data-stories-duration="4000"
+      data-stories-cursor="true"
+      data-stories='[
+        {"profileImg": "./public/profile-1.png", "profileName": "Behance", "title": ["Showcasing creative", "portfolios and projects", "from top designers"], "linkLabel": "Read More", "linkSrc": "https://behance.net", "storyImg": "./public/story-1.png"},
+        {"profileImg": "./public/profile-2.png", "profileName": "Dribbble", "title": ["Inspiring design", "ideas and visual", "creations from experts"], "linkLabel": "Discover", "linkSrc": "https://dribbble.com", "storyImg": "./public/story-2.png"},
+        {"profileImg": "./public/profile-3.png", "profileName": "Awwwards", "title": ["Award-winning web", "design and development", "projects"], "linkLabel": "Check It Out", "linkSrc": "https://awwwards.com", "storyImg": "./public/story-3.png"},
+        {"profileImg": "./public/profile-4.png", "profileName": "Adobe", "title": ["Curated design", "inspiration for", "creative professionals"], "linkLabel": "Adobe More", "linkSrc": "https://adobe.com", "storyImg": "./public/story-4.png"},
+        {"profileImg": "./public/profile-5.png", "profileName": "Creative Bloq", "title": ["The latest in", "design trends", "and tutorials"], "linkLabel": "Explore", "linkSrc": "https://creativebloq.com", "storyImg": "./public/story-5.png"},
+        {"profileImg": "./public/profile-6.png", "profileName": "Smashing Magazine", "title": ["Practical tips", "for web designers", "and developers"], "linkLabel": "Visit Site", "linkSrc": "https://smashingmagazine.com", "storyImg": "./public/story-6.png"}
+      ]'
+    >
+      <div data-stories-container>
+        <div data-stories-cursor><p></p></div>
+        <div data-stories-img></div>
+        <div data-stories-content>
+          <div data-stories-row>
+            <div data-stories-indices></div>
+            <div data-stories-profile>
+              <div data-stories-profile-icon>
+                <img src="" alt="" />
+              </div>
+              <div data-stories-profile-name></div>
+            </div>
+          </div>
+          <div data-stories-row>
+            <div data-stories-title></div>
+          </div>
+          <div data-stories-row>
+            <a data-stories-link href="#">Read More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./stories.js"></script>
+  </body>
+</html>

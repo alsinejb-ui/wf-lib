@@ -1,0 +1,34 @@
+{
+  "type": "@webflow/XscpData",
+  "payload": {
+    "nodes": [
+      {
+        "_id": "wf-lib-test-div",
+        "type": "Block",
+        "tag": "div",
+        "classes": [],
+        "children": [],
+        "data": {
+          "tag": "div",
+          "text": false,
+          "xattr": []
+        }
+      }
+    ],
+    "styles": [],
+    "assets": [],
+    "ix1": [],
+    "ix2": {
+      "interactions": [],
+      "events": [],
+      "actionLists": []
+    }
+  },
+  "meta": {
+    "unlinkedSymbolCount": 0,
+    "droppedLinks": 0,
+    "dynBindRemovedCount": 0,
+    "dynListBindRemovedCount": 0,
+    "paginationRemovedCount": 0
+  }
+}

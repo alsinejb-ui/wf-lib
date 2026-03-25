@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap");
+
+[data-component="poly-app-photo-dump"] {
+  --poly-base-100: #fff;
+  --poly-base-200: #4a4a4a;
+  --poly-base-300: #141414;
+  --poly-base-400: #0f0f0f;
+  font-family: "Instrument Serif", serif;
+}
+
+[data-component="poly-app-photo-dump"] * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+[data-component="poly-app-photo-dump"] h1 {
+  font-size: clamp(3rem, 5vw, 7vw);
+  font-weight: 500;
+  line-height: 0.9;
+  letter-spacing: -0.025rem;
+}
+
+[data-component="poly-app-photo-dump"] section {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--poly-base-100);
+  overflow: hidden;
+}
+
+[data-component="poly-app-photo-dump"] section h1 {
+  width: 45%;
+  text-align: center;
+  will-change: opacity;
+  z-index: 2;
+}
+
+[data-component="poly-app-photo-dump"] [data-poly-intro],
+[data-component="poly-app-photo-dump"] [data-poly-outro] {
+  background-color: var(--poly-base-400);
+}
+
+[data-component="poly-app-photo-dump"] [data-poly-spotlight] {
+  background-color: var(--poly-base-300);
+}
+
+[data-component="poly-app-photo-dump"] .poly-card {
+  position: absolute;
+  width: 250px;
+  height: 300px;
+  border-radius: 1rem;
+  border: 0.5rem solid var(--poly-base-200);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+  will-change: transform;
+  overflow: hidden;
+}
+
+[data-component="poly-app-photo-dump"] .poly-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+@media (max-width: 1000px) {
+  [data-component="poly-app-photo-dump"] section h1 {
+    width: 100%;
+    padding: 2rem;
+  }
+}

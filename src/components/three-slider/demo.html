@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ThreeJS Infinite Slider | Demo</title>
+    <link rel="stylesheet" href="./three-slider.css" />
+    <style>
+      /* Styles demo uniquement */
+      @import url("https://fonts.cdnfonts.com/css/pp-neue-montreal");
+
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #141414;
+        overflow: hidden;
+      }
+
+      [data-three-title],
+      [data-three-count] {
+        font-family: "PP Neue Montreal", sans-serif;
+        font-weight: 500;
+        font-size: 1rem;
+        letter-spacing: 0.05em;
+      }
+    </style>
+  </head>
+  <body>
+    <section
+      data-component="three-slider"
+      data-min-height="1"
+      data-max-height="1.5"
+      data-aspect-ratio="1.5"
+      data-gap="0.05"
+      data-wheel-speed="0.01"
+      data-distortion-strength="2.5"
+    >
+      <div data-three-info>
+        <p data-three-title></p>
+        <p data-three-count></p>
+      </div>
+      <canvas data-three-canvas></canvas>
+
+      <div data-three-slide data-title="Contour"       data-image="./public/img1.jpg"></div>
+      <div data-three-slide data-title="Velum Drift"   data-image="./public/img2.jpg"></div>
+      <div data-three-slide data-title="Quiet Exchange" data-image="./public/img3.jpg"></div>
+      <div data-three-slide data-title="Earth Routine" data-image="./public/img4.jpg"></div>
+      <div data-three-slide data-title="Metal Echo"    data-image="./public/img5.jpg"></div>
+      <div data-three-slide data-title="Tanned Edge"   data-image="./public/img6.jpg"></div>
+      <div data-three-slide data-title="Humidity"      data-image="./public/img7.jpg"></div>
+      <div data-three-slide data-title="Limestone Air" data-image="./public/img8.jpg"></div>
+      <div data-three-slide data-title="Warm Surface"  data-image="./public/img9.jpg"></div>
+      <div data-three-slide data-title="Dust &amp; Craft" data-image="./public/img10.jpg"></div>
+    </section>
+
+    <script type="module" src="./three-slider.js"></script>
+  </body>
+</html>

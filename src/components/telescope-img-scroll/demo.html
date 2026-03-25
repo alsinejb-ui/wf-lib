@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Telescope Image Scroll | Demo</title>
+    <link rel="stylesheet" href="./telescope-img-scroll.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Instrument Serif", serif;
+      }
+
+      section {
+        position: relative;
+        width: 100%;
+        min-height: 100svh;
+        background-color: #e3e3db;
+        color: #141414;
+        overflow: hidden;
+      }
+
+      .hero,
+      .outro {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .hero h1,
+      .outro h1 {
+        width: 50%;
+        text-align: center;
+        font-size: 4rem;
+        line-height: 1.1;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="hero">
+      <h1>The frame is only the beginning.</h1>
+    </section>
+
+    <div
+      data-component="telescope-img-scroll"
+      data-telescope-lenis="true"
+      data-telescope-scroll-height="4"
+      data-telescope-scrub="1"
+    >
+      <section data-telescope-trigger style="position: relative; width: 100%; height: 100svh;">
+        <div data-telescope-container>
+          <div data-telescope-img>
+            <img src="./public/banner.png" alt="" />
+          </div>
+          <div data-telescope-layer><img src="./public/banner.png" alt="" /></div>
+          <div data-telescope-layer><img src="./public/banner.png" alt="" /></div>
+          <div data-telescope-layer><img src="./public/banner.png" alt="" /></div>
+          <div data-telescope-layer><img src="./public/banner.png" alt="" /></div>
+          <div data-telescope-layer><img src="./public/banner.png" alt="" /></div>
+          <div data-telescope-layer><img src="./public/banner.png" alt="" /></div>
+
+          <div data-telescope-header>
+            <h1>The Season Wears Confidence</h1>
+          </div>
+        </div>
+
+        <div data-telescope-intro>
+          <div data-telescope-intro-item><h1>Surface</h1></div>
+          <div data-telescope-intro-item><h1>Layered</h1></div>
+        </div>
+      </section>
+    </div>
+
+    <section class="outro">
+      <h1>And that's the silhouette.</h1>
+    </section>
+
+    <script type="module" src="./telescope-img-scroll.js"></script>
+  </body>
+</html>

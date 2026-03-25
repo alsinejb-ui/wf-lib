@@ -1,0 +1,17 @@
+[data-component="glass-pane"] [data-gp-container] {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+[data-component="glass-pane"] [data-gp-image] {
+  display: none;
+}
+
+[data-component="glass-pane"] [data-gp-container] canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

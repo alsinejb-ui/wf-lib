@@ -1,0 +1,9 @@
+/* reveal — styles scopés composant uniquement */
+
+:root {
+  --wf-lib-reveal-will-change: opacity, transform;
+}
+
+[data-component="reveal"] [data-reveal-item] {
+  will-change: var(--wf-lib-reveal-will-change);
+}

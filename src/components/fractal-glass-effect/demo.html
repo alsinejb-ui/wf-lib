@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fractal Glass Effect | Demo</title>
+    <link rel="stylesheet" href="./fractal-glass-effect.css" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        min-height: 100%;
+        background: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-component="fractal-glass-effect">
+      <nav data-fge-nav>
+        <div data-fge-logo>
+          <a href="#">&#8486; Glassform</a>
+        </div>
+        <div data-fge-nav-links>
+          <a href="#">Experiments</a>
+          <a href="#">Objects</a>
+          <a href="#">Exhibits</a>
+        </div>
+      </nav>
+
+      <section data-fge-hero>
+        <img data-fge-texture src="./public/hero3.jpg" alt="" />
+        <div data-fge-content>
+          <h1 data-fge-title>
+            Designed for the space between silence and noise.
+          </h1>
+          
+        </div>
+      </section>
+    </div>
+
+    <script type="module" src="./fractal-glass-effect.js"></script>
+  </body>
+</html>
