@@ -29,27 +29,39 @@ const SNIPPETS = {
 </section>`,
 
   headGlobal: `<!-- Dans <head> — Project Settings > Custom Code -->
+<!-- crossorigin="anonymous" : chargement CORS (preview canvas *.canvas.webflow.com) -->
 <link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/gh/alsinejb-ui/wf-lib@main/dist/wf-lib.css"
+  crossorigin="anonymous"
 />`,
 
-  bodyGlobal: `<!-- Avant </body> -->
+  bodyGlobal: `<!-- Avant </body> — script classique (recommandé Webflow, sans type="module") -->
+<script
+  defer
+  src="https://cdn.jsdelivr.net/gh/alsinejb-ui/wf-lib@main/dist/wf-lib.global.js"
+  crossorigin="anonymous"
+></script>`,
+
+  bodyGlobalModule: `<!-- Variante module ES — souvent bloquée dans le Designer / preview canvas -->
 <script
   type="module"
   src="https://cdn.jsdelivr.net/gh/alsinejb-ui/wf-lib@main/dist/wf-lib.js"
+  crossorigin="anonymous"
 ></script>`,
 
   headIndividual: `<!-- Dans <head> — après build:components -->
 <link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/gh/alsinejb-ui/wf-lib@main/dist/svg-image-hover/svg-image-hover.css"
+  crossorigin="anonymous"
 />`,
 
   bodyIndividual: `<!-- Avant </body> -->
 <script
   type="module"
   src="https://cdn.jsdelivr.net/gh/alsinejb-ui/wf-lib@main/dist/svg-image-hover/svg-image-hover.js"
+  crossorigin="anonymous"
 ></script>`,
 
   cssVar: `--svg-hover-copy: #000; /* Couleur du texte du titre (défaut: #000) */`,
@@ -152,6 +164,7 @@ for (const [id, text] of Object.entries({
   "snippet-html": SNIPPETS.htmlMarkup,
   "snippet-head-global": SNIPPETS.headGlobal,
   "snippet-body-global": SNIPPETS.bodyGlobal,
+  "snippet-body-global-module": SNIPPETS.bodyGlobalModule,
   "snippet-head-individual": SNIPPETS.headIndividual,
   "snippet-body-individual": SNIPPETS.bodyIndividual,
   "snippet-css-var": SNIPPETS.cssVar,

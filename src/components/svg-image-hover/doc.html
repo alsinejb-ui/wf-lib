@@ -323,6 +323,34 @@
       .doc-callout code {
         font-size: 0.78rem;
       }
+      .doc-steps {
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: var(--surface);
+        padding: 1rem 1.15rem 1.1rem;
+        margin-bottom: 1.5rem;
+      }
+      .doc-steps h2 {
+        font-size: 1.05rem;
+        font-weight: 600;
+        margin: 0 0 0.85rem;
+      }
+      .doc-steps ol {
+        margin: 0;
+        padding-left: 1.35rem;
+        color: var(--text);
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+      .doc-steps li {
+        margin-bottom: 0.65rem;
+      }
+      .doc-steps li:last-child {
+        margin-bottom: 0;
+      }
+      .doc-steps strong {
+        color: var(--text);
+      }
     </style>
   </head>
   <body>
@@ -345,9 +373,10 @@
         Dans Webflow : <strong>CSS et JS via Custom Code</strong> (liens wf-lib),
         puis <strong>structure 100 % native</strong> (collage Xscp ou création
         dans le Designer) — <strong>pas d’Embed HTML</strong> pour porter la
-        structure. Les URLs jsDelivr ci-dessous peuvent être
-        <strong>refusées dans le Designer et en staging</strong> : voir l’encart
-        dans l’onglet Webflow.
+        structure. Pour Webflow, utilisez le
+        <strong>script classique</strong>
+        <code>wf-lib.global.js</code> (pas <code>type="module"</code>) — voir le
+        guide pas à pas dans l’onglet Webflow.
       </p>
 
       <div class="hero">
@@ -366,37 +395,130 @@
       </div>
 
       <div data-panel="webflow">
+        <section class="doc-steps" aria-labelledby="guide-debutant-title">
+          <h2 id="guide-debutant-title">Guide pas à pas (sans expérience dev)</h2>
+          <ol>
+            <li>
+              <strong>Vérifiez le fichier sur GitHub.</strong> Le dépôt
+              <a href="https://github.com/alsinejb-ui/wf-lib/tree/main/dist"
+                >alsinejb-ui/wf-lib → dossier <code>dist</code></a>
+              doit contenir <code>wf-lib.global.js</code> (script classique) et
+              <code>wf-lib.css</code>. Sinon, demandez à quelqu’un qui a le
+              projet de lancer <code>npm run build</code> puis d’envoyer ces
+              fichiers sur GitHub (branche <code>main</code>).
+            </li>
+            <li>
+              <strong>Ouvrez Webflow</strong> → votre site → menu
+              <strong>Site settings</strong> (roue dentée) ou
+              <strong>Project settings</strong>.
+            </li>
+            <li>
+              Allez dans <strong>Custom code</strong> (ou équivalent : code
+              global du site).
+            </li>
+            <li>
+              Activez <strong>Run custom code in Preview</strong> (exécuter le
+              custom code en mode Preview / commentaires) si Webflow le propose
+              dans cette section — sinon le canvas
+              <code>*.canvas.webflow.com</code> n’appliquera pas vos scripts.
+              Réf.
+              <a
+                href="https://help.webflow.com/hc/en-us/articles/40748357886227-Supporting-external-resources-in-previews-of-custom-code"
+                >Aide Webflow — external resources in previews</a>.
+            </li>
+            <li>
+              Dans le champ <strong>Head code</strong>, collez le bloc
+              <strong>« HTML — &lt;head&gt; »</strong> ci-dessous (le
+              <code>&lt;link&gt;</code> vers <code>wf-lib.css</code>), puis
+              enregistrez.
+            </li>
+            <li>
+              Dans le champ <strong>Footer code</strong> (souvent « avant
+              <code>&lt;/body&gt;</code> »), collez le bloc
+              <strong>« HTML — avant &lt;/body&gt; »</strong> qui pointe vers
+              <code>wf-lib.global.js</code> — <strong>sans</strong>
+              <code>type="module"</code>. Enregistrez.
+            </li>
+            <li>
+              <strong>Publiez le site</strong> (bouton Publish). Attendez la fin
+              du déploiement.
+            </li>
+            <li>
+              <strong>Testez dans un vrai navigateur</strong> (Chrome, Safari) :
+              ouvrez l’<strong>URL publiée</strong> du site (ex.
+              <code>https://votre-projet.webflow.io</code> ou votre domaine
+              personnalisé). Ne vous fiez pas seulement à l’aperçu dans le
+              Designer : l’erreur CORS peut apparaître dans le Designer même si le
+              site publié fonctionne, ou l’inverse.
+            </li>
+            <li>
+              <strong>Vérifiez la page</strong> : la structure avec
+              <code>data-component="svg-image-hover"</code> doit être sur la
+              page (ou le symbole utilisé sur la page). Sans ça, rien ne
+              s’anime.
+            </li>
+            <li>
+              Si ça ne charge toujours pas : dans Site settings, regardez s’il y a
+              une <strong>Content Security Policy</strong> personnalisée qui
+              bloque <code>cdn.jsdelivr.net</code>. Sinon, il faudra héberger
+              les fichiers <code>.css</code> / <code>.js</code> sur
+              <strong>votre propre domaine</strong> (aide d’un dev ou hébergeur).
+            </li>
+          </ol>
+        </section>
+
         <section class="doc-callout" aria-labelledby="callout-webflow-cdn-title">
           <h2 id="callout-webflow-cdn-title">
-            Designer, staging et scripts distants (CORS)
+            Canvas Webflow, CORS et <code>wf-lib</code>
           </h2>
           <p>
-            Webflow peut afficher une erreur du type
-            <strong>« Unable to load external script »</strong> avec mention de
-            <code>.canvas.webflow.com</code> et des
-            <strong>restrictions CORS</strong>. Cela concerne surtout le
-            <strong>canvas du Designer</strong> ; en pratique, le
-            <strong>staging</strong> (sous-domaine Webflow) peut aussi bloquer le
-            chargement d’un <code>type="module"</code> hébergé sur un CDN tiers
-            (ex. jsDelivr), selon la politique d’origine / CSP du projet.
+            En preview / commentaires, le site s’affiche sur
+            <code>{shortName}.canvas.webflow.com</code>. Les ressources externes
+            doivent pouvoir être chargées depuis ce domaine (voir
+            <a
+              href="https://developers.webflow.com/data/docs/custom-code-preview-mode"
+              >Supporting custom code in preview mode</a>
+            et
+            <a
+              href="https://help.webflow.com/hc/en-us/articles/40748357886227-Supporting-external-resources-in-previews-of-custom-code"
+              >Supporting external resources in previews</a>).
           </p>
-          <p><strong>Pistes si le CDN ne charge pas :</strong></p>
+          <p>
+            Le bundle <strong>wf-lib</strong> ne vérifie pas le hostname et ne
+            bloque pas le canvas : il est compatible avec la doc Webflow. Des
+            helpers sont exposés pour <em>votre</em> code custom (API,
+            <code>postMessage</code>, etc.) :
+            <code>WFLib.isWebflowCanvasPreview()</code>,
+            <code>WFLib.isWebflowHostedDomain()</code>,
+            <code>WFLib.isWebflowAllowedOrigin(origin)</code> (global IIFE), ou
+            imports nommés depuis <code>wf-lib.js</code> en module ES.
+          </p>
+          <p>
+            Les snippets ci-dessous utilisent
+            <code>crossorigin="anonymous"</code> sur le CSS et le JS pour un
+            chargement <strong>CORS</strong> explicite, comme recommandé pour les
+            ressources hébergées hors Webflow en preview.
+          </p>
+          <p><strong>Pourquoi <code>wf-lib.global.js</code> plutôt que <code>type="module"</code> ?</strong></p>
+          <p>
+            Webflow signale souvent
+            <strong>« Unable to load external script »</strong> pour les
+            <strong>modules ES</strong> depuis un CDN tiers. Le script classique
+            <code>wf-lib.global.js</code> avec <code>defer</code> est en général
+            mieux toléré sur l’URL publiée et en preview.
+          </p>
+          <p><strong>Si le script ne charge toujours pas :</strong></p>
           <ul>
             <li>
-              Servir <code>wf-lib.css</code> et <code>wf-lib.js</code> depuis un
-              <strong>hébergement sous votre propre domaine</strong> (même
-              origine que le site ou sous-domaine que vous contrôlez), avec des
-              en-têtes CORS adaptés si le navigateur les exige.
+              Vérifier <strong>Run custom code in Preview</strong> (voir guide
+              ci-dessus) et la <strong>CSP</strong> du projet
+              (<code>cdn.jsdelivr.net</code>).
             </li>
             <li>
-              Vérifier <strong>Project settings</strong> : une
-              <strong>Content Security Policy</strong> personnalisée peut
-              interdire <code>cdn.jsdelivr.net</code> ou les modules externes.
-            </li>
-            <li>
-              Valider le composant hors Webflow (page locale, cette doc, ou page
-              sur votre domaine) pour isoler un problème « CDN / hébergeur »
-              d’un problème de structure ou de classes.
+              Héberger <code>wf-lib.css</code> et
+              <code>wf-lib.global.js</code> sur <strong>votre domaine</strong> si
+              le CDN refuse l’origine <code>*.canvas.webflow.com</code> (hors
+              contrôle du code wf-lib).
             </li>
           </ul>
         </section>
@@ -404,11 +526,12 @@
         <section class="block">
           <h2>Étape 1 — CSS &amp; JS (Custom Code du site)</h2>
           <p class="hint" style="margin-top: 0">
-            Les styles du composant viennent de <strong>wf-lib.css</strong> (pas
-            d’Embed pour du CSS). Ajoutez le lien dans le
-            <code>&lt;head&gt;</code> et le module JS avant
-            <code>&lt;/body&gt;</code> — le script initialise automatiquement les
-            <code>[data-component]</code>.
+            Les styles viennent de <strong>wf-lib.css</strong>. Le JS recommandé
+            pour Webflow est <strong>wf-lib.global.js</strong> (sans
+            <code>type="module"</code>) avec
+            <code>crossorigin="anonymous"</code> : démarrage auto des
+            <code>[data-component]</code>, compatible preview canvas selon la
+            doc Webflow.
           </p>
           <div class="code-block">
             <div class="code-head">
@@ -421,12 +544,21 @@
           </div>
           <div class="code-block">
             <div class="code-head">
-              <span>HTML — avant &lt;/body&gt;</span>
+              <span>HTML — avant &lt;/body&gt; (recommandé Webflow)</span>
               <button type="button" data-copy-target="snippet-body-global">
                 Copier
               </button>
             </div>
             <pre><code id="snippet-body-global"></code></pre>
+          </div>
+          <div class="code-block">
+            <div class="code-head">
+              <span>Variante — module ES (souvent bloquée)</span>
+              <button type="button" data-copy-target="snippet-body-global-module">
+                Copier
+              </button>
+            </div>
+            <pre><code id="snippet-body-global-module"></code></pre>
           </div>
         </section>
 
@@ -580,7 +712,7 @@
       <ul class="meta-list">
         <li>
           <strong>wf-lib (CDN)</strong>
-          jsDelivr, ref.
+          <code>wf-lib.global.js</code> + css, jsDelivr
           <code>@main</code>
           —
           <a href="https://github.com/alsinejb-ui/wf-lib/tree/main">GitHub</a>

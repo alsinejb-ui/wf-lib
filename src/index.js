@@ -63,6 +63,12 @@ const registry = {
   "camille-mormal-slider": initCamilleMormalSlider,
 };
 
+export {
+  isWebflowAllowedOrigin,
+  isWebflowCanvasPreview,
+  isWebflowHostedDomain,
+} from "./webflow-canvas.js";
+
 export function initComponents(root = document) {
   for (const el of root.querySelectorAll("[data-component]")) {
     const name = el.getAttribute("data-component");

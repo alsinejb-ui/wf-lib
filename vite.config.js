@@ -26,8 +26,10 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, "src/index.js"),
       name: "WFLib",
-      formats: ["es"],
-      fileName: () => "wf-lib.js",
+      // es = import module ; iife = <script src> sans type="module" (moins bloqué sur Webflow)
+      formats: ["es", "iife"],
+      fileName: (format) =>
+        format === "iife" ? "wf-lib.global.js" : "wf-lib.js",
     },
     rollupOptions: {
       output: {
