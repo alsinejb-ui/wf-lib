@@ -26,11 +26,29 @@ function getStrokePaths(card) {
   return [...card.querySelectorAll("svg path")];
 }
 
+/** Longueur de tracé fiable (Webflow / SVG souvent besoin d’un layout avant getTotalLength). */
+function getPathDashLength(path) {
+  if (typeof path.getBoundingClientRect === "function") {
+    path.getBoundingClientRect();
+  }
+  const len = path.getTotalLength?.() ?? 0;
+  return Number.isFinite(len) && len > 0 ? len : 0;
+}
+
+function readBaseStrokeWidth(path) {
+  const raw =
+    path.getAttribute("stroke-width") ??
+    path.getAttribute("strokeWidth") ??
+    "200";
+  const n = parseFloat(String(raw), 10);
+  return Number.isFinite(n) && n > 0 ? n : 200;
+}
+
 export function initSvgImageHover(el) {
   const cards = getSvgHoverCards(el);
 
   cards.forEach((card) => {
-    const paths = getStrokePaths(card);
+    const pathEls = getStrokePaths(card);
     const titleEl = card.querySelector("[data-svg-hover-title]");
 
     if (!titleEl) return;
@@ -38,11 +56,24 @@ export function initSvgImageHover(el) {
     const words = splitWords(titleEl);
     gsap.set(words, { yPercent: 100 });
 
-    paths.forEach((path) => {
-      const length = path.getTotalLength();
-      path.style.strokeDasharray = length;
-      path.style.strokeDashoffset = length;
-    });
+    /* Attributs SVG (stroke-dash*) : bien plus fiable que le CSS sur path dans Webflow */
+    const strokeTargets = pathEls
+      .map((path) => {
+        path.style.strokeDasharray = "";
+        path.style.strokeDashoffset = "";
+        const length = getPathDashLength(path);
+        if (length <= 0) return null;
+        const baseStrokeWidth = readBaseStrokeWidth(path);
+        gsap.set(path, {
+          attr: {
+            "stroke-dasharray": length,
+            "stroke-dashoffset": length,
+            "stroke-width": baseStrokeWidth,
+          },
+        });
+        return { path, length, baseStrokeWidth };
+      })
+      .filter(Boolean);
 
     let tl;
 
@@ -50,12 +81,17 @@ export function initSvgImageHover(el) {
       if (tl) tl.kill();
       tl = gsap.timeline();
 
-      paths.forEach((path) => {
+      strokeTargets.forEach(({ path, length }) => {
+        gsap.set(path, {
+          attr: {
+            "stroke-dasharray": length,
+            "stroke-dashoffset": length,
+          },
+        });
         tl.to(
           path,
           {
-            strokeDashoffset: 0,
-            attr: { "stroke-width": 700 },
+            attr: { "stroke-dashoffset": 0, "stroke-width": 700 },
             duration: 1.5,
             ease: "power2.out",
           },
@@ -79,13 +115,14 @@ export function initSvgImageHover(el) {
       if (tl) tl.kill();
       tl = gsap.timeline();
 
-      paths.forEach((path) => {
-        const length = path.getTotalLength();
+      strokeTargets.forEach(({ path, length, baseStrokeWidth }) => {
         tl.to(
           path,
           {
-            strokeDashoffset: length,
-            attr: { "stroke-width": 200 },
+            attr: {
+              "stroke-dashoffset": length,
+              "stroke-width": baseStrokeWidth,
+            },
             duration: 1,
             ease: "power2.out",
           },
