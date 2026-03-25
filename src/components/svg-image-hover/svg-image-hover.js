@@ -19,11 +19,18 @@ function getSvgHoverCards(root) {
   return [...root.querySelectorAll("[data-svg-hover-card]")];
 }
 
+/** Traits animés : .svg-stroke path (démo) ou tout path dans un svg de la carte (Webflow). */
+function getStrokePaths(card) {
+  const scoped = card.querySelectorAll(".svg-stroke path");
+  if (scoped.length > 0) return [...scoped];
+  return [...card.querySelectorAll("svg path")];
+}
+
 export function initSvgImageHover(el) {
   const cards = getSvgHoverCards(el);
 
   cards.forEach((card) => {
-    const paths = card.querySelectorAll(".svg-stroke path");
+    const paths = getStrokePaths(card);
     const titleEl = card.querySelector("[data-svg-hover-title]");
 
     if (!titleEl) return;

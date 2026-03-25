@@ -27,12 +27,26 @@
   transform: translate(-50%, -50%) scale(1.5);
   width: 100%;
   height: 100%;
+  pointer-events: none;
+  /* currentColor des paths : visible si le thème Webflow ne transmet pas de couleur */
+  color: var(--svg-hover-stroke, currentColor);
 }
 
-[data-component="svg-image-hover"] .svg-stroke svg,
-[data-component="svg-image-hover"] .svg-stroke path {
+[data-component="svg-image-hover"] .svg-stroke svg {
+  display: block;
   width: 100%;
   height: 100%;
+}
+
+/* Pas de width/height sur <path> (cassant le rendu). Forcer trait visible si Webflow met fill sur les paths. */
+/* Tous les paths décoratifs du composant (y compris si le wrapper n’a pas .svg-stroke) */
+[data-component="svg-image-hover"] svg path {
+  fill: none;
+  stroke: currentColor;
+}
+
+[data-component="svg-image-hover"] .svg-stroke-2 {
+  color: var(--svg-hover-stroke-2, currentColor);
 }
 
 [data-component="svg-image-hover"] .card-title {

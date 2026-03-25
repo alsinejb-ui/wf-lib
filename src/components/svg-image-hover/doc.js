@@ -64,7 +64,10 @@ const SNIPPETS = {
   crossorigin="anonymous"
 ></script>`,
 
-  cssVar: `--svg-hover-copy: #000; /* Couleur du texte du titre (défaut: #000) */`,
+  cssVar: `/* Optionnel — dans le Custom Code ou une classe parente */
+--svg-hover-copy: #000;       /* texte du titre */
+--svg-hover-stroke: #e67339;  /* 1er trait (currentColor du calque svg-stroke) */
+--svg-hover-stroke-2: #e0e0e0; /* 2e calque si .svg-stroke-2 */`,
 
   jsStandalone: `import { initSvgImageHover } from "./svg-image-hover.js";
 
