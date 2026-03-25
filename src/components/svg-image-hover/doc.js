@@ -43,13 +43,13 @@ const SNIPPETS = {
   headIndividual: `<!-- Dans <head> — après build:components -->
 <link
   rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/alsinejb-ui/wf-lib@v1.0.0/dist/svg-image-hover/svg-image-hover.css"
+  href="https://cdn.jsdelivr.net/gh/alsinejb-ui/wf-lib@main/dist/svg-image-hover/svg-image-hover.css"
 />`,
 
   bodyIndividual: `<!-- Avant </body> -->
 <script
   type="module"
-  src="https://cdn.jsdelivr.net/gh/alsinejb-ui/wf-lib@v1.0.0/dist/svg-image-hover/svg-image-hover.js"
+  src="https://cdn.jsdelivr.net/gh/alsinejb-ui/wf-lib@main/dist/svg-image-hover/svg-image-hover.js"
 ></script>`,
 
   cssVar: `--svg-hover-copy: #000; /* Couleur du texte du titre (défaut: #000) */`,

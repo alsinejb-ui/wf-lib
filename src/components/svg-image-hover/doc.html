@@ -291,6 +291,38 @@
       .steps-ol li {
         margin-bottom: 0.35rem;
       }
+      .doc-callout {
+        border: 1px solid #c9a227;
+        border-radius: var(--radius);
+        background: #fffbeb;
+        padding: 1rem 1.15rem;
+        margin-bottom: 1.5rem;
+      }
+      .doc-callout h2 {
+        font-size: 0.95rem;
+        margin: 0 0 0.5rem;
+        color: var(--text);
+      }
+      .doc-callout p,
+      .doc-callout ul {
+        font-size: 0.84rem;
+        color: var(--muted);
+        margin: 0 0 0.5rem;
+        line-height: 1.5;
+      }
+      .doc-callout ul {
+        padding-left: 1.15rem;
+        margin-bottom: 0;
+      }
+      .doc-callout li {
+        margin-bottom: 0.35rem;
+      }
+      .doc-callout li:last-child {
+        margin-bottom: 0;
+      }
+      .doc-callout code {
+        font-size: 0.78rem;
+      }
     </style>
   </head>
   <body>
@@ -301,6 +333,7 @@
         <a href="./demo2.html">Aperçu doc (1 carte)</a>
         <a href="../../../COMPONENTS.md">COMPONENTS.md (source)</a>
         <a href="../../docs/webflow-copy-test/index.html">Test presse-papiers</a>
+        <a href="https://github.com/alsinejb-ui/wf-lib/tree/main">wf-lib sur GitHub</a>
       </nav>
     </aside>
 
@@ -312,7 +345,9 @@
         Dans Webflow : <strong>CSS et JS via Custom Code</strong> (liens wf-lib),
         puis <strong>structure 100 % native</strong> (collage Xscp ou création
         dans le Designer) — <strong>pas d’Embed HTML</strong> pour porter la
-        structure.
+        structure. Les URLs jsDelivr ci-dessous peuvent être
+        <strong>refusées dans le Designer et en staging</strong> : voir l’encart
+        dans l’onglet Webflow.
       </p>
 
       <div class="hero">
@@ -331,6 +366,41 @@
       </div>
 
       <div data-panel="webflow">
+        <section class="doc-callout" aria-labelledby="callout-webflow-cdn-title">
+          <h2 id="callout-webflow-cdn-title">
+            Designer, staging et scripts distants (CORS)
+          </h2>
+          <p>
+            Webflow peut afficher une erreur du type
+            <strong>« Unable to load external script »</strong> avec mention de
+            <code>.canvas.webflow.com</code> et des
+            <strong>restrictions CORS</strong>. Cela concerne surtout le
+            <strong>canvas du Designer</strong> ; en pratique, le
+            <strong>staging</strong> (sous-domaine Webflow) peut aussi bloquer le
+            chargement d’un <code>type="module"</code> hébergé sur un CDN tiers
+            (ex. jsDelivr), selon la politique d’origine / CSP du projet.
+          </p>
+          <p><strong>Pistes si le CDN ne charge pas :</strong></p>
+          <ul>
+            <li>
+              Servir <code>wf-lib.css</code> et <code>wf-lib.js</code> depuis un
+              <strong>hébergement sous votre propre domaine</strong> (même
+              origine que le site ou sous-domaine que vous contrôlez), avec des
+              en-têtes CORS adaptés si le navigateur les exige.
+            </li>
+            <li>
+              Vérifier <strong>Project settings</strong> : une
+              <strong>Content Security Policy</strong> personnalisée peut
+              interdire <code>cdn.jsdelivr.net</code> ou les modules externes.
+            </li>
+            <li>
+              Valider le composant hors Webflow (page locale, cette doc, ou page
+              sur votre domaine) pour isoler un problème « CDN / hébergeur »
+              d’un problème de structure ou de classes.
+            </li>
+          </ul>
+        </section>
+
         <section class="block">
           <h2>Étape 1 — CSS &amp; JS (Custom Code du site)</h2>
           <p class="hint" style="margin-top: 0">
@@ -508,6 +578,13 @@
     <aside class="rail-right">
       <h3>Détails</h3>
       <ul class="meta-list">
+        <li>
+          <strong>wf-lib (CDN)</strong>
+          jsDelivr, ref.
+          <code>@main</code>
+          —
+          <a href="https://github.com/alsinejb-ui/wf-lib/tree/main">GitHub</a>
+        </li>
         <li>
           <strong>Dossier</strong>
           src/components/svg-image-hover
