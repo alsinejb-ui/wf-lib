@@ -92,6 +92,10 @@ const components = [
     id: "scroll-based-layout-animations",
     sourceDir: "scroll-based-layout-animations",
   },
+  {
+    id: "grid-animated",
+    sourceDir: "scroll-based-layout-2",
+  },
 ];
 
 for (const component of components) {

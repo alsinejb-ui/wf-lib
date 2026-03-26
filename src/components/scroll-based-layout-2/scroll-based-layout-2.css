@@ -1,0 +1,345 @@
+[data-component="grid-animated"],
+[data-component="grid-animated"] *,
+[data-component="grid-animated"] *::before,
+[data-component="grid-animated"] *::after {
+	box-sizing: border-box;
+}
+
+[data-component="grid-animated"] {
+	font-size: 18px;
+	--color-text: #fff;
+	--color-bg: #131417;
+	--color-caption: #fff;
+	--csla2-section-pad-x: clamp(1.25rem, 5vw, 3rem);
+	/* Recouvre la jointure grille → outro (spacer pin / sous-pixels). */
+	--csla2-seam-cover: max(16px, 1.25vw);
+	margin: 0;
+	max-width: 100%;
+	overflow-x: hidden;
+	overflow-x: clip;
+	color: var(--color-text);
+	background-color: var(--color-bg);
+	font-family: "tenon", -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
+		sans-serif;
+	font-weight: 400;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+[data-component="grid-animated"] .csla2-main {
+	margin: 0;
+	padding: 0;
+}
+
+[data-component="grid-animated"] .csla2-section {
+	position: relative;
+	width: 100%;
+	background: var(--color-bg);
+}
+
+[data-component="grid-animated"] .csla2-section--intro {
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: clamp(3rem, 10vh, 6rem) var(--csla2-section-pad-x);
+}
+
+[data-component="grid-animated"] .csla2-section__inner {
+	max-width: 42rem;
+	margin: 0 auto;
+	width: 100%;
+}
+
+[data-component="grid-animated"] .csla2-section--intro .csla2-section__inner {
+	text-align: center;
+}
+
+[data-component="grid-animated"] .csla2-lead {
+	font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+	line-height: 1.55;
+	margin: 0 0 1rem;
+	color: rgba(255, 255, 255, 0.88);
+}
+
+[data-component="grid-animated"] .csla2-kicker {
+	font-size: 0.7rem;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	margin: 0 0 1rem;
+	color: rgba(255, 255, 255, 0.45);
+}
+
+[data-component="grid-animated"] .csla2-title {
+	font-size: clamp(1.75rem, 5vw, 2.75rem);
+	line-height: 1.1;
+	font-weight: 500;
+	margin: 0 0 1.25rem;
+	letter-spacing: -0.02em;
+}
+
+[data-component="grid-animated"] .csla2-section--grid {
+	position: relative;
+	z-index: 1;
+	padding: clamp(2rem, 8vh, 5rem) 0;
+}
+
+[data-component="grid-animated"] .csla2-section--grid .gallery-wrap {
+	margin: 0 auto;
+}
+
+[data-component="grid-animated"] .csla2-section--outro {
+	position: relative;
+	z-index: 2;
+	min-height: 70vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: clamp(4rem, 15vh, 8rem) var(--csla2-section-pad-x);
+	background: var(--color-bg);
+	transform: translateZ(0);
+	/* Chevauche la section grille pour masquer la fente (sous-pixels / spacer ScrollTrigger). */
+	margin-top: calc(-1 * var(--csla2-seam-cover));
+	padding-top: calc(clamp(4rem, 15vh, 8rem) + var(--csla2-seam-cover));
+}
+
+/* Bandeau pleine largeur au-dessus de l’outro : filet de sécurité si le margin ne suffit pas. */
+[data-component="grid-animated"] .csla2-section--outro::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: calc(-1 * var(--csla2-seam-cover));
+	height: var(--csla2-seam-cover);
+	background: var(--color-bg);
+	pointer-events: none;
+	z-index: 0;
+}
+
+[data-component="grid-animated"] .csla2-section--outro .csla2-section__inner {
+	position: relative;
+	z-index: 1;
+	text-align: center;
+}
+
+[data-component="grid-animated"] .csla2-outro-text {
+	margin: 0 auto;
+	font-size: clamp(1rem, 2vw, 1.2rem);
+	line-height: 1.6;
+	color: rgba(255, 255, 255, 0.65);
+	max-width: 32rem;
+}
+
+[data-component="grid-animated"] .csla2-code-hint {
+	display: block;
+	margin-top: 1.25rem;
+	padding: 1rem 1.15rem;
+	text-align: left;
+	background: rgba(255, 255, 255, 0.04);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 6px;
+	font-size: 0.72rem;
+	line-height: 1.45;
+	overflow-x: auto;
+	color: rgba(255, 255, 255, 0.55);
+}
+
+[data-component="grid-animated"] .csla2-code-hint code {
+	font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+	word-break: break-word;
+}
+
+[data-component="grid-animated"].csla2-js.csla2-loading::before,
+[data-component="grid-animated"].csla2-js.csla2-loading::after {
+	content: "";
+	position: fixed;
+	z-index: 1000;
+}
+
+[data-component="grid-animated"].csla2-js.csla2-loading::before {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: var(--color-bg);
+}
+
+[data-component="grid-animated"].csla2-js.csla2-loading::after {
+	top: 50%;
+	left: 50%;
+	width: 60px;
+	height: 60px;
+	margin: -30px 0 0 -30px;
+	border-radius: 50%;
+	opacity: 0.4;
+	background: #aaa;
+	animation: csla2LoaderAnim 0.7s linear infinite alternate forwards;
+}
+
+@keyframes csla2LoaderAnim {
+	to {
+		opacity: 1;
+		transform: scale3d(0.5, 0.5, 1);
+	}
+}
+
+[data-component="grid-animated"] .gallery-wrap {
+	position: relative;
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 40vh auto;
+	/* Le clip est sur .gallery-wrap-clip (JS) pour permettre un masque sous le bloc sans le recouper. */
+	overflow: visible;
+	background: var(--color-bg);
+	isolation: isolate;
+	transform: translateZ(0);
+	backface-visibility: hidden;
+}
+
+[data-component="grid-animated"] .gallery-wrap-clip {
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	min-height: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* Bande sous le wrap : comble les fentes / sous-pixels entre fin de pin et contenu suivant (non masquée par overflow du clip). */
+[data-component="grid-animated"] .gallery-wrap::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 100%;
+	height: max(48px, var(--csla2-seam-cover));
+	background: var(--color-bg);
+	pointer-events: none;
+	z-index: 40;
+}
+
+[data-component="grid-animated"] .gallery-wrap--large {
+	height: 110vh;
+}
+
+[data-component="grid-animated"] .gallery-wrap--dense {
+	margin: 0;
+}
+
+[data-component="grid-animated"] .gallery {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	flex: none;
+	isolation: isolate;
+}
+
+[data-component="grid-animated"] .gallery--breakout {
+	width: min-content;
+}
+
+[data-component="grid-animated"] .gallery__item {
+	background-position: 50% 50%;
+	background-size: cover;
+	flex: none;
+	border-radius: 0;
+	position: relative;
+	filter: brightness(1);
+	z-index: 1;
+	will-change: transform;
+	backface-visibility: hidden;
+}
+
+[data-component="grid-animated"] .gallery--csla2 .gallery__item--csla2-center {
+	z-index: 3;
+}
+
+[data-component="grid-animated"] .gallery__item-cut {
+	overflow: hidden;
+	display: grid;
+	place-items: center;
+}
+
+[data-component="grid-animated"] .gallery__item-inner {
+	width: 100%;
+	height: 100%;
+	background-position: 50% 50%;
+	background-size: cover;
+	background-repeat: no-repeat;
+	will-change: transform;
+	backface-visibility: hidden;
+}
+
+[data-component="grid-animated"] .caption {
+	font-size: clamp(1rem, 3vw, 1.75rem);
+	z-index: 5;
+	color: var(--color-caption);
+	font-weight: 400;
+}
+
+[data-component="grid-animated"] .gallery--grid {
+	height: auto;
+	display: grid;
+	grid-template-columns: repeat(3, auto);
+	grid-template-rows: repeat(3, auto);
+}
+
+[data-component="grid-animated"] .gallery.gallery--grid {
+	--csla-p2-gap: clamp(0.25rem, 0.7vw, 0.5rem);
+	row-gap: var(--csla-p2-row-gap, var(--csla-p2-gap));
+	column-gap: var(--csla-p2-column-gap, var(--csla-p2-gap));
+}
+
+/* Avant init JS : tuiles fixes type démo classique */
+[data-component="grid-animated"] .gallery--grid:not(.gallery--csla2) .gallery__item {
+	height: 33vh;
+	width: 33vw;
+}
+
+/* Grille fluide : la tuile centrale gagne des « fr », les autres sont repoussées */
+[data-component="grid-animated"] .gallery--grid.gallery--csla2 {
+	width: min(92vw, 92vh);
+	height: min(92vw, 92vh);
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
+}
+
+[data-component="grid-animated"] .gallery--grid.gallery--csla2 .gallery__item {
+	width: 100%;
+	height: 100%;
+	min-width: 0;
+	min-height: 0;
+}
+
+/* Breakout viewport : le scroll horizontal est contenu par overflow-x:clip sur le composant. */
+[data-component="grid-animated"] .gallery--grid .caption {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	padding: 0;
+	top: 50%;
+	left: 50%;
+	margin-top: 50vh;
+	margin-left: -50vw;
+	display: grid;
+	place-items: center;
+	max-width: none;
+	opacity: 0;
+	pointer-events: none;
+}
+
+[data-component="grid-animated"] .gallery--csla2.gallery--grid .caption {
+	margin-top: -40vh;
+}
+
+[data-component="grid-animated"] .gallery--grid .caption p {
+	padding: 50vh 30vw 10vh 10vw;
+}
+
+[data-component="grid-animated"] .gallery--csla2.gallery--grid .caption p {
+	margin-top: 0;
+}

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>grid-animated — grille 3×3 (preset 2)</title>
+    <link rel="stylesheet" href="./scroll-based-layout-2.css" />
+  </head>
+  <body style="margin: 0">
+    <div data-component="grid-animated" data-csla-lenis="true">
+      <main class="csla2-main">
+        <section class="csla2-section csla2-section--intro" aria-label="Introduction">
+          <div class="csla2-section__inner">
+            <p class="csla2-kicker">Démo grid-animated</p>
+            <h1 class="csla2-title">Grille 3×3, gaps fixes, homothétie</h1>
+            <p class="csla2-lead">
+              Fais défiler pour verrouiller la grille : la tuile centrale occupe l’écran et repousse
+              les huit autres sans fondu. Ensuite tu peux encore défiler un peu&nbsp;: l’image reste
+              en plein cadre (option&nbsp;A — plateau), puis le pin se lève et l’outro arrive.
+            </p>
+            <span class="csla2-code-hint"
+              >Options Webflow-friendly (sans JSON) :
+              <code
+                >data-csla-full-view-scroll-hold="0.35" data-csla-scroll-end="+=420%"
+                data-csla-push-strength="1" data-csla-center-zoom-out-start="1.2"
+                data-csla-others-zoom-in-end="1.12" data-csla-cover-overscan="1.04"</code
+              >
+              — tu peux aussi garder <code>data-csla-options</code> JSON (prioritaire si présent).</span
+            >
+          </div>
+        </section>
+
+        <section class="csla2-section csla2-section--grid" aria-label="Grille animée">
+          <div class="gallery-wrap">
+            <div
+              class="gallery gallery--grid gallery--breakout"
+              data-csla-preset2-row-gap="clamp(0.25rem, 0.7vw, 0.5rem)"
+              data-csla-preset2-column-gap="clamp(0.25rem, 0.7vw, 0.5rem)"
+              data-csla-full-view-scroll-hold="0.35"
+              data-csla-scroll-end="+=420%"
+              data-csla-push-strength="1"
+              data-csla-center-zoom-out-start="1.2"
+              data-csla-others-zoom-in-end="1.12"
+              data-csla-cover-overscan="1.04"
+            >
+              <div class="gallery__item gallery__item-cut">
+                <div
+                  class="gallery__item-inner"
+                  style="background-image: url(./assets/luxe-1.png)"
+                ></div>
+              </div>
+              <div class="gallery__item gallery__item-cut">
+                <div
+                  class="gallery__item-inner"
+                  style="background-image: url(./assets/luxe-2.png)"
+                ></div>
+              </div>
+              <div class="gallery__item gallery__item-cut">
+                <div
+                  class="gallery__item-inner"
+                  style="background-image: url(./assets/luxe-3.png)"
+                ></div>
+              </div>
+              <div class="gallery__item gallery__item-cut">
+                <div
+                  class="gallery__item-inner"
+                  style="background-image: url(./assets/luxe-4.png)"
+                ></div>
+              </div>
+              <div class="gallery__item gallery__item-cut">
+                <div
+                  class="gallery__item-inner"
+                  style="background-image: url(./assets/luxe-5.png)"
+                ></div>
+              </div>
+              <div class="gallery__item gallery__item-cut">
+                <div
+                  class="gallery__item-inner"
+                  style="background-image: url(./assets/luxe-6.png)"
+                ></div>
+              </div>
+              <div class="gallery__item gallery__item-cut">
+                <div
+                  class="gallery__item-inner"
+                  style="background-image: url(./assets/luxe-7.png)"
+                ></div>
+              </div>
+              <div class="gallery__item gallery__item-cut">
+                <div
+                  class="gallery__item-inner"
+                  style="background-image: url(./assets/luxe-8.png)"
+                ></div>
+              </div>
+              <div class="gallery__item gallery__item-cut">
+                <div
+                  class="gallery__item-inner"
+                  style="background-image: url(./assets/luxe-9.png)"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="csla2-section csla2-section--outro" aria-label="Fin de parcours">
+          <div class="csla2-section__inner">
+            <p class="csla2-outro-text">
+              Fin du scroll : tu es en bas de la démo. La section grille se désactive et le flux reprend
+              normalement vers le contenu suivant.
+            </p>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="./scroll-based-layout-2.js"></script>
+  </body>
+</html>

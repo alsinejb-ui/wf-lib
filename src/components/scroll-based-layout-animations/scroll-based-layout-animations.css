@@ -449,6 +449,26 @@
 	width: 33vw;
 }
 
+/*
+ * Preset 2 : row / column modifiables (Webflow : --csla-p2-row-gap, --csla-p2-column-gap)
+ * ou unifiés via --csla-p2-gap. Fin plein écran : tween JS → 0 sur row/column vars.
+ */
+[data-component="scroll-based-layout-animations"]
+	.gallery[data-csla-preset="2"].gallery--grid {
+	--csla-p2-gap: clamp(1rem, 2.75vw, 2.25rem);
+	row-gap: var(--csla-p2-row-gap, var(--csla-p2-gap));
+	column-gap: var(--csla-p2-column-gap, var(--csla-p2-gap));
+}
+
+/*
+ * Secours Webflow : sans ancêtre [data-component="scroll-based-layout-animations"].
+ */
+.gallery[data-csla-preset="2"].gallery--grid {
+	--csla-p2-gap: clamp(1rem, 2.75vw, 2.25rem);
+	row-gap: var(--csla-p2-row-gap, var(--csla-p2-gap));
+	column-gap: var(--csla-p2-column-gap, var(--csla-p2-gap));
+}
+
 [data-component="scroll-based-layout-animations"] .gallery--switch.gallery--grid {
 	gap: 0;
 }

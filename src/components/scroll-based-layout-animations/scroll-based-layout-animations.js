@@ -6,6 +6,35 @@ import imagesLoaded from "imagesloaded";
 
 gsap.registerPlugin(Flip, ScrollTrigger);
 
+/** Preset 2 : garde les gaps jusqu’à cette part de timeline, puis ferme vers 0 (plein écran). */
+const PRESET2_GAP_TWEEN_START = 0.78;
+const PRESET2_GAP_TWEEN_DURATION = 0.22;
+/** Si row/column gap à 0 au mesurage, ne pas figer 0 en inline. */
+const PRESET2_GAP_FALLBACK_PX = 16;
+
+function measurePreset2InitialGapsPx(galleryEl) {
+  const read = () => {
+    const cs = getComputedStyle(galleryEl);
+    return {
+      row: parseFloat(cs.rowGap),
+      col: parseFloat(cs.columnGap),
+    };
+  };
+  let { row, col } = read();
+  if (
+    !Number.isFinite(row) ||
+    row <= 0 ||
+    !Number.isFinite(col) ||
+    col <= 0
+  ) {
+    void galleryEl.offsetHeight;
+    ({ row, col } = read());
+  }
+  row = Number.isFinite(row) && row > 0 ? row : PRESET2_GAP_FALLBACK_PX;
+  col = Number.isFinite(col) && col > 0 ? col : PRESET2_GAP_FALLBACK_PX;
+  return { row, col };
+}
+
 /** Presets alignés sur la démo Codrops « On-Scroll Image Layout Animations » */
 const GALLERY_PRESETS = {
   "1": { flip: { absoluteOnLeave: true, scale: false } },
@@ -73,6 +102,30 @@ function triggerFlipOnScroll(galleryEl, options) {
     .map((item) => (item.children.length > 0 ? [...item.children] : []))
     .flat();
 
+  const isPreset2 = galleryEl.getAttribute("data-csla-preset") === "2";
+  let preset2GapsPx = null;
+  if (isPreset2) {
+    if (options.preset2RowGap != null) {
+      galleryEl.style.setProperty(
+        "--csla-p2-row-gap",
+        String(options.preset2RowGap),
+      );
+    }
+    if (options.preset2ColumnGap != null) {
+      galleryEl.style.setProperty(
+        "--csla-p2-column-gap",
+        String(options.preset2ColumnGap),
+      );
+    }
+    void galleryEl.offsetHeight;
+    preset2GapsPx = measurePreset2InitialGapsPx(galleryEl);
+    galleryEl.style.setProperty("--csla-p2-row-gap", `${preset2GapsPx.row}px`);
+    galleryEl.style.setProperty(
+      "--csla-p2-column-gap",
+      `${preset2GapsPx.col}px`,
+    );
+  }
+
   galleryEl.classList.add("gallery--switch");
   const flipstate = Flip.getState([galleryItems, galleryCaption], {
     props: "filter, opacity",
@@ -95,6 +148,19 @@ function triggerFlipOnScroll(galleryEl, options) {
     },
     stagger: settings.stagger,
   });
+
+  if (preset2GapsPx !== null) {
+    tl.to(
+      galleryEl,
+      {
+        "--csla-p2-row-gap": 0,
+        "--csla-p2-column-gap": 0,
+        duration: PRESET2_GAP_TWEEN_DURATION,
+        ease: "power2.in",
+      },
+      PRESET2_GAP_TWEEN_START,
+    );
+  }
 
   if (galleryItemsInner.length) {
     tl.fromTo(

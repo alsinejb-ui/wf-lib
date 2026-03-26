@@ -19,6 +19,7 @@ import "./components/cosmos-parallax-effect-mousemove/cosmos-parallax-effect-mou
 import "./components/247artists-trail/247artists-trail.css";
 import "./components/camille-mormal-slider/camille-mormal-slider.css";
 import "./components/scroll-based-layout-animations/scroll-based-layout-animations.css";
+import "./components/scroll-based-layout-2/scroll-based-layout-2.css";
 
 import { initReveal } from "./components/reveal/reveal.js";
 import { initSvgImageHover } from "./components/svg-image-hover/svg-image-hover.js";
@@ -41,6 +42,7 @@ import { initCosmosParallaxEffectMousemove } from "./components/cosmos-parallax-
 import { init247artistsTrail } from "./components/247artists-trail/247artists-trail.js";
 import { initCamilleMormalSlider } from "./components/camille-mormal-slider/camille-mormal-slider.js";
 import { initScrollBasedLayoutAnimations } from "./components/scroll-based-layout-animations/scroll-based-layout-animations.js";
+import { initScrollBasedLayout2 } from "./components/scroll-based-layout-2/scroll-based-layout-2.js";
 
 const registry = {
   reveal: initReveal,
@@ -64,6 +66,7 @@ const registry = {
   "247artists-trail": init247artistsTrail,
   "camille-mormal-slider": initCamilleMormalSlider,
   "scroll-based-layout-animations": initScrollBasedLayoutAnimations,
+  "grid-animated": initScrollBasedLayout2,
 };
 
 export {
