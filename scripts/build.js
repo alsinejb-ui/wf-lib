@@ -88,6 +88,10 @@ const components = [
     id: "smooothy-parallax-slider",
     sourceDir: "smooothy-parallax-slider",
   },
+  {
+    id: "scroll-based-layout-animations",
+    sourceDir: "scroll-based-layout-animations",
+  },
 ];
 
 for (const component of components) {

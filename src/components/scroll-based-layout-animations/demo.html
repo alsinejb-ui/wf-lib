@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Scroll-based layout animations (Codrops / GSAP Flip)</title>
+    <link rel="stylesheet" href="./scroll-based-layout-animations.css" />
+  </head>
+  <body style="margin: 0">
+    <div data-component="scroll-based-layout-animations" data-csla-lenis="true">
+      <main class="csla-main">
+        <div class="frame">
+          <div class="frame__title">
+            <h1 class="frame__title-main">Scroll layout → Flip</h1>
+          </div>
+        </div>
+
+        <section class="project project--intro">
+          <span class="project__label project__label--name">Démo</span>
+          <span class="project__name">wf-lib</span>
+          <span class="project__label project__label--date">Source</span>
+          <span class="project__date">Codrops 2023</span>
+          <h2 class="project__title">
+            <span class="project__title-line">Mise en page</span>
+            <span class="project__title-line">au scroll</span>
+          </h2>
+          <span class="project__label project__label--mission">Détail</span>
+          <div class="project__mission">
+            <p>
+              Reproduction du comportement « On-Scroll Image Layout Animations » : GSAP Flip +
+              ScrollTrigger (pin + scrub), option Lenis. Remplacez les images par les vôtres.
+            </p>
+            <p>
+              Chaque bloc <code>.gallery</code> peut avoir
+              <code>data-csla-preset="1"…"9"</code> ou <code>data-csla-options</code> (JSON).
+            </p>
+          </div>
+        </section>
+
+        <div class="gallery-wrap">
+          <div class="gallery gallery--row" data-csla-preset="1">
+            <div
+              class="gallery__item gallery__item--s"
+              style="background-image: url(https://picsum.photos/seed/sbla1/520/780)"
+            ></div>
+            <div
+              class="gallery__item gallery__item--m"
+              style="background-image: url(https://picsum.photos/seed/sbla2/520/780)"
+            ></div>
+            <div
+              class="gallery__item gallery__item--l"
+              style="background-image: url(https://picsum.photos/seed/sbla3/520/780)"
+            ></div>
+            <div
+              class="gallery__item gallery__item--xl gallery__item--center"
+              style="background-image: url(https://picsum.photos/seed/sbla4/800/1200)"
+            ></div>
+            <div
+              class="gallery__item gallery__item--l"
+              style="background-image: url(https://picsum.photos/seed/sbla5/520/780)"
+            ></div>
+            <div
+              class="gallery__item gallery__item--m"
+              style="background-image: url(https://picsum.photos/seed/sbla6/520/780)"
+            ></div>
+            <div
+              class="gallery__item gallery__item--s"
+              style="background-image: url(https://picsum.photos/seed/sbla7/520/780)"
+            ></div>
+            <div class="caption">Preset 1 — rangée centrée vers légende en bas.</div>
+          </div>
+        </div>
+
+        <section class="project project--details project--left">
+          <span class="project__label project__label--default">Grille</span>
+          <p>
+            Le preset 2 utilise des tuiles avec fond sur <code>.gallery__item-inner</code> pour
+            l’animation de scale interne.
+          </p>
+        </section>
+
+        <div class="gallery-wrap gallery-wrap--large">
+          <div class="gallery gallery--grid gallery--breakout" data-csla-preset="2">
+            <div class="gallery__item gallery__item-cut">
+              <div
+                class="gallery__item-inner"
+                style="background-image: url(https://picsum.photos/seed/sblb1/900/900)"
+              ></div>
+            </div>
+            <div class="gallery__item gallery__item-cut">
+              <div
+                class="gallery__item-inner"
+                style="background-image: url(https://picsum.photos/seed/sblb2/900/900)"
+              ></div>
+            </div>
+            <div class="gallery__item gallery__item-cut">
+              <div
+                class="gallery__item-inner"
+                style="background-image: url(https://picsum.photos/seed/sblb3/900/900)"
+              ></div>
+            </div>
+            <div class="gallery__item gallery__item-cut">
+              <div
+                class="gallery__item-inner"
+                style="background-image: url(https://picsum.photos/seed/sblb4/900/900)"
+              ></div>
+            </div>
+            <div class="gallery__item gallery__item-cut">
+              <div
+                class="gallery__item-inner"
+                style="background-image: url(https://picsum.photos/seed/sblb5/900/900)"
+              ></div>
+            </div>
+            <div class="gallery__item gallery__item-cut">
+              <div
+                class="gallery__item-inner"
+                style="background-image: url(https://picsum.photos/seed/sblb6/900/900)"
+              ></div>
+            </div>
+            <div class="gallery__item gallery__item-cut">
+              <div
+                class="gallery__item-inner"
+                style="background-image: url(https://picsum.photos/seed/sblb7/900/900)"
+              ></div>
+            </div>
+            <div class="gallery__item gallery__item-cut">
+              <div
+                class="gallery__item-inner"
+                style="background-image: url(https://picsum.photos/seed/sblb8/900/900)"
+              ></div>
+            </div>
+            <div class="gallery__item gallery__item-cut">
+              <div
+                class="gallery__item-inner"
+                style="background-image: url(https://picsum.photos/seed/sblb9/900/900)"
+              ></div>
+            </div>
+            <div class="caption">
+              <p>Preset 2 — grille qui se déploie en plein écran au scroll.</p>
+            </div>
+          </div>
+        </div>
+
+        <section class="project project--details project--right">
+          <span class="project__label project__label--default">Stack</span>
+          <p>Preset 4 : cartes empilées puis alignées en bandeau.</p>
+        </section>
+
+        <div class="gallery-wrap gallery-wrap--dense">
+          <div
+            class="gallery gallery--stack gallery--stack-inverse gallery--stack-dark"
+            data-csla-preset="4"
+          >
+            <div
+              class="gallery__item"
+              style="background-image: url(https://picsum.photos/seed/sblc1/640/900)"
+            ></div>
+            <div
+              class="gallery__item"
+              style="background-image: url(https://picsum.photos/seed/sblc2/640/900)"
+            ></div>
+            <div
+              class="gallery__item"
+              style="background-image: url(https://picsum.photos/seed/sblc3/640/900)"
+            ></div>
+            <div
+              class="gallery__item"
+              style="background-image: url(https://picsum.photos/seed/sblc4/640/900)"
+            ></div>
+            <div
+              class="gallery__item"
+              style="background-image: url(https://picsum.photos/seed/sblc5/640/900)"
+            ></div>
+            <div
+              class="gallery__item"
+              style="background-image: url(https://picsum.photos/seed/sblc6/640/900)"
+            ></div>
+            <div class="caption">
+              <p>Preset 4 — stack inversé avec assombrissement progressif.</p>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script type="module" src="./scroll-based-layout-animations.js"></script>
+  </body>
+</html>

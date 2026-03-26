@@ -18,6 +18,7 @@ import "./components/eduardbodak-scroll-animation/eduardbodak-scroll-animation.c
 import "./components/cosmos-parallax-effect-mousemove/cosmos-parallax-effect-mousemove.css";
 import "./components/247artists-trail/247artists-trail.css";
 import "./components/camille-mormal-slider/camille-mormal-slider.css";
+import "./components/scroll-based-layout-animations/scroll-based-layout-animations.css";
 
 import { initReveal } from "./components/reveal/reveal.js";
 import { initSvgImageHover } from "./components/svg-image-hover/svg-image-hover.js";
@@ -39,6 +40,7 @@ import { initEduardbodakScrollAnimation } from "./components/eduardbodak-scroll-
 import { initCosmosParallaxEffectMousemove } from "./components/cosmos-parallax-effect-mousemove/cosmos-parallax-effect-mousemove.js";
 import { init247artistsTrail } from "./components/247artists-trail/247artists-trail.js";
 import { initCamilleMormalSlider } from "./components/camille-mormal-slider/camille-mormal-slider.js";
+import { initScrollBasedLayoutAnimations } from "./components/scroll-based-layout-animations/scroll-based-layout-animations.js";
 
 const registry = {
   reveal: initReveal,
@@ -61,6 +63,7 @@ const registry = {
   "cosmos-parallax-effect-mousemove": initCosmosParallaxEffectMousemove,
   "247artists-trail": init247artistsTrail,
   "camille-mormal-slider": initCamilleMormalSlider,
+  "scroll-based-layout-animations": initScrollBasedLayoutAnimations,
 };
 
 export {

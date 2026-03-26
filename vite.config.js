@@ -16,6 +16,7 @@ import { defineConfig } from "vite";
 //   http://localhost:5173/src/components/elementis-scroll/demo.html (data-component="elementis-scroll") (data-component="stories")
 //   http://localhost:5173/src/docs/webflow-copy-test/index.html — test presse-papiers Xscp / Copy to Webflow
 //   http://localhost:5173/src/components/svg-image-hover/doc.html — page doc (test)
+//   http://localhost:5173/src/components/scroll-based-layout-animations/demo.html (data-component="scroll-based-layout-animations")
 
 export default defineConfig({
   build: {
