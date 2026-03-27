@@ -400,18 +400,16 @@ export function initScrollBasedLayout2(el) {
     }
     lenis?.destroy();
     lenis = null;
-    el.classList.remove("csla2-js", "csla2-loading");
+    el.classList.remove("csla2-js");
     ScrollTrigger.refresh();
   };
 
   el._scrollBasedLayout2Cleanup = cleanup;
 
-  el.classList.add("csla2-js", "csla2-loading");
+  el.classList.add("csla2-js");
 
   preloadGalleryImages(el).then(() => {
     if (aborted) return;
-    el.classList.remove("csla2-loading");
-
     ctx = gsap.context((gsapCtx) => {
       const useLenis = el.getAttribute("data-csla-lenis") === "true";
       if (useLenis) {

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>scroll-based-layout-2 — Documentation wf-lib</title>
+    <style>
+      :root {
+        --bg: #f1f0ec;
+        --surface: #fff;
+        --border: #e0ded8;
+        --text: #161513;
+        --muted: #5e5c57;
+        --radius: 10px;
+        --font: system-ui, -apple-system, sans-serif;
+        --mono: ui-monospace, "Cascadia Code", monospace;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: var(--font);
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.55;
+        display: grid;
+        grid-template-columns: minmax(200px, 240px) minmax(0, 1fr) minmax(180px, 220px);
+        min-height: 100vh;
+      }
+      @media (max-width: 960px) { body { grid-template-columns: 1fr; } .rail-right { display: none; } }
+      .rail-left {
+        padding: 1.5rem 1.25rem; border-right: 1px solid var(--border); background: var(--surface);
+        position: sticky; top: 0; align-self: start; max-height: 100vh; overflow: auto;
+      }
+      .rail-left a { color: var(--text); text-decoration: none; }
+      .rail-left a:hover { text-decoration: underline; }
+      .logo { font-weight: 800; font-size: 0.85rem; letter-spacing: 0.06em; margin-bottom: 1.25rem; }
+      .nav-links { display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.9rem; }
+      main { padding: clamp(1.25rem, 3vw, 2.5rem); max-width: 48rem; }
+      .rail-right {
+        padding: 1.5rem 1.25rem; border-left: 1px solid var(--border); background: var(--surface);
+        position: sticky; top: 0; align-self: start; font-size: 0.85rem;
+      }
+      .meta-list { margin: 0; padding: 0; list-style: none; }
+      .meta-list li { margin-bottom: 0.65rem; color: var(--muted); }
+      .meta-list strong { display: block; color: var(--text); font-size: 0.8rem; margin-bottom: 0.15rem; }
+      .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.75rem; }
+      .tag { font-size: 0.7rem; padding: 0.2rem 0.45rem; border: 1px solid var(--border); border-radius: 4px; background: var(--bg); }
+      h1 { font-size: clamp(1.75rem, 4vw, 2.35rem); margin: 0 0 0.5rem; line-height: 1.15; }
+      .lede { color: var(--muted); margin: 0 0 1.75rem; max-width: 40rem; }
+      .hero {
+        border: 1px solid var(--border); border-radius: calc(var(--radius) + 4px);
+        overflow: hidden; background: #0d0d0c; margin-bottom: 1.75rem;
+      }
+      .hero iframe { display: block; width: 100%; height: min(420px, 56vw); border: 0; background: var(--surface); }
+      .tabs { display: flex; gap: 0.35rem; margin-bottom: 1.25rem; }
+      .tabs button {
+        font: inherit; cursor: pointer; padding: 0.45rem 0.9rem; border-radius: 8px;
+        border: 1px solid var(--border); background: var(--surface); color: var(--muted);
+      }
+      .tabs button[aria-pressed="true"] { background: var(--text); color: var(--surface); border-color: var(--text); }
+      .block { margin-bottom: 1.75rem; }
+      .block h2 { font-size: 1.05rem; margin: 0 0 0.65rem; }
+      .code-block { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--surface); margin-bottom: 1rem; }
+      .code-head {
+        display: flex; justify-content: space-between; align-items: center; padding: 0.45rem 0.75rem;
+        background: #f7f6f3; border-bottom: 1px solid var(--border); font-size: 0.75rem; color: var(--muted);
+      }
+      .code-head button {
+        font: inherit; font-size: 0.72rem; padding: 0.3rem 0.65rem;
+        border-radius: 6px; border: 1px solid var(--border); background: var(--surface); cursor: pointer;
+      }
+      pre { margin: 0; padding: 0.85rem 1rem; overflow: auto; max-height: 320px; }
+      code { font-family: var(--mono); font-size: 0.72rem; line-height: 1.45; white-space: pre; }
+      .webflow-box { border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.15rem; background: var(--surface); margin-bottom: 1rem; }
+      .webflow-actions { display: flex; gap: 0.5rem; margin-top: 0.75rem; margin-bottom: 0.75rem; }
+      .btn-primary {
+        font: inherit; cursor: pointer; padding: 0.65rem 1.1rem; border-radius: 8px;
+        border: 1px solid var(--text); background: var(--text); color: var(--surface); font-weight: 600; font-size: 0.9rem;
+      }
+      .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; }
+      #status-webflow { font-size: 0.85rem; padding: 0.6rem 0.75rem; border-radius: 8px; border: 1px solid var(--border); margin-top: 0.65rem; }
+      #status-webflow[data-kind="ok"] { background: #f0faf0; border-color: #9bc99b; }
+      #status-webflow[data-kind="err"] { background: #fff5f5; border-color: #e0a0a0; }
+      .hint { font-size: 0.82rem; color: var(--muted); margin: 0.5rem 0 0; }
+    </style>
+  </head>
+  <body>
+    <aside class="rail-left">
+      <div class="logo">WF-LIB</div>
+      <nav class="nav-links">
+        <a href="./demo.html">Démo</a>
+        <a href="../svg-image-hover/doc.html">Référence structure doc</a>
+      </nav>
+    </aside>
+
+    <main>
+      <h1>scroll-based-layout-2</h1>
+      <p class="lede">
+        Même structure de doc que `svg-image-hover`, avec snippets et bouton “Copier pour Webflow”
+        alimenté par `webflow-structure.xscp.json`.
+      </p>
+      <div class="hero">
+        <iframe src="./demo.html" title="Aperçu scroll-based-layout-2" loading="lazy"></iframe>
+      </div>
+      <div class="tabs">
+        <button type="button" data-tab="webflow" aria-pressed="true">Webflow</button>
+        <button type="button" data-tab="code" aria-pressed="false">Code</button>
+      </div>
+
+      <div data-panel="webflow">
+        <section class="block">
+          <h2>Étape 1 — CSS &amp; JS (Custom Code)</h2>
+          <div class="code-block">
+            <div class="code-head">
+              <span>HTML — &lt;head&gt;</span>
+              <button type="button" data-copy-target="snippet-head-global">Copier</button>
+            </div>
+            <pre><code id="snippet-head-global"></code></pre>
+          </div>
+          <div class="code-block">
+            <div class="code-head">
+              <span>HTML — avant &lt;/body&gt;</span>
+              <button type="button" data-copy-target="snippet-body-global">Copier</button>
+            </div>
+            <pre><code id="snippet-body-global"></code></pre>
+          </div>
+        </section>
+
+        <section class="block">
+          <h2>Étape 2 — Structure native dans le Designer</h2>
+          <p class="hint" style="margin-top:0">
+            Le bouton charge `webflow-structure.xscp.json` depuis ce dossier et copie le payload pour collage dans Webflow.
+          </p>
+          <div class="webflow-box">
+            <div class="webflow-actions">
+              <button type="button" class="btn-primary" id="btn-copy-webflow" disabled>Copier pour Webflow</button>
+            </div>
+            <div id="status-webflow" data-kind="info"></div>
+          </div>
+        </section>
+      </div>
+
+      <div data-panel="code" hidden>
+        <section class="block">
+          <h2>Référence HTML</h2>
+          <div class="code-block">
+            <div class="code-head">
+              <span>HTML minimal</span>
+              <button type="button" data-copy-target="snippet-html">Copier</button>
+            </div>
+            <pre><code id="snippet-html"></code></pre>
+          </div>
+          <div class="code-block">
+            <div class="code-head">
+              <span>CSS minimal</span>
+              <button type="button" data-copy-target="snippet-css">Copier</button>
+            </div>
+            <pre><code id="snippet-css"></code></pre>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <aside class="rail-right">
+      <ul class="meta-list">
+        <li><strong>Dossier</strong>src/components/scroll-based-layout-2</li>
+        <li><strong>JSON copy</strong>webflow-structure.xscp.json</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">Webflow</span>
+        <span class="tag">ScrollTrigger</span>
+      </div>
+    </aside>
+
+    <script type="module" src="./doc.js"></script>
+  </body>
+</html>
